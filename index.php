@@ -9,24 +9,6 @@ require('menu.php');
         <a href="contact.php">Nous contacter</a>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
 <?php
 require('footer.php');
 ?>
