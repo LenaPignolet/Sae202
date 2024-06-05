@@ -1,3 +1,18 @@
+<?php
+session_start();
+require("../connexion_sql.php");
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sae 202</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+</head>
+
 <nav class="bg-gray-800">
   <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
@@ -29,17 +44,17 @@
           </button>
         </div>
         <div class="flex-shrink-0 flex items-center">
-          <img class="hidden lg:block h-8 w-auto mr-3" src="images/logo.png" alt="Workflow">
+          <img class="hidden lg:block h-8 w-auto mr-3" src="../images/logo.png" alt="Workflow">
         </div>
         <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
           <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-          <a href="index.php" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Accueil</a>
+          <a href="../index.php" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Accueil</a>
 
-          <a href="liste_jardins.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Jardins</a>
+          <a href="../liste_jardins.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Jardins</a>
 
           <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Qui sommes-nous ?</a>
 
-          <a href="contact.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+          <a href="../contact.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
         </div>
       </div>
       <div class="flex items-center">
@@ -49,11 +64,10 @@
                 if(isset($_SESSION['id'])){ // Check if $_SESSION['id'] is set
             ?>
             
-            
             <?php
               }else {?>
-            <a href="auth/formConnexion.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Connexion</span></a>
-            <a href="auth/formInscription.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Inscription</span></a>
+            <a href="formConnexion.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Connexion</span></a>
+            <a href="formInscription.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Inscription</span></a>
             <!-- Profile dropdown -->
           <div class="ml-3 relative">
             <div>
@@ -75,9 +89,9 @@
             -->
             <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <!-- Active: "bg-gray-100", Not Active: "" -->
-              <a href="/profil/profil.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
+              <a href="../profil/profil.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
 
-              <a href="/auth/logout.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Déconnexion</a>
+              <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Déconnexion</a>
             </div>
           </div>
             <?php
@@ -138,3 +152,29 @@
     </div>
   </div>
 </nav>
+
+<body>
+<form method="POST" action="traitement.php" enctype="multipart/form-data">
+    <label for="nom">Votre nom</label>
+    <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" required><br>
+
+    <label for="prenom">Votre prénom</label>
+    <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required><br>
+
+    <label for="email">Votre Email</label>
+    <input type="email" id="email" name="email" placeholder="Entrez votre Email" required><br>
+
+    <label for="password">Votre mot de passe</label>
+    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required><br>
+
+    <label for="photo">Votre photo de profil</label>
+    <input type="file" id="photo" name="user_pp" required><br>
+
+    <input type="submit" value="M'inscrire" name="ok">
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+<footer>
+    <p>© PAGEC - Tous droits réservés</p>
+    <a href="../mentions.php">Mentions légales</a>
+</footer>

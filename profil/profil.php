@@ -1,3 +1,63 @@
+<?php
+// Vérifiez si l'utilisateur est connecté
+require('../connexion_sql.php');
+
+session_start();
+
+
+try {
+    $stmt = $mabd->prepare("SELECT * FROM User WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $_SESSION['id']);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+    if (!$user) {
+        echo "Utilisateur non trouvé.";
+        exit;
+    }
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sae 202</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .profile-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px 30px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            margin-top: 0;
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
 <nav class="bg-gray-800">
   <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
@@ -29,17 +89,17 @@
           </button>
         </div>
         <div class="flex-shrink-0 flex items-center">
-          <img class="hidden lg:block h-8 w-auto mr-3" src="images/logo.png" alt="Workflow">
+          <img class="hidden lg:block h-8 w-auto mr-3" src="../images/logo.png" alt="Workflow">
         </div>
         <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
           <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-          <a href="index.php" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Accueil</a>
+          <a href="../index.php" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Accueil</a>
 
-          <a href="liste_jardins.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Jardins</a>
+          <a href="../liste_jardins.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Jardins</a>
 
           <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Qui sommes-nous ?</a>
 
-          <a href="contact.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+          <a href="../contact.php" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
         </div>
       </div>
       <div class="flex items-center">
@@ -49,11 +109,10 @@
                 if(isset($_SESSION['id'])){ // Check if $_SESSION['id'] is set
             ?>
             
-            
             <?php
               }else {?>
-            <a href="auth/formConnexion.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Connexion</span></a>
-            <a href="auth/formInscription.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Inscription</span></a>
+            <a href="formConnexion.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Connexion</span></a>
+            <a href="formInscription.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Inscription</span></a>
             <!-- Profile dropdown -->
           <div class="ml-3 relative">
             <div>
@@ -75,9 +134,9 @@
             -->
             <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
               <!-- Active: "bg-gray-100", Not Active: "" -->
-              <a href="/profil/profil.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
+              <a href="../profil/profil.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
 
-              <a href="/auth/logout.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Déconnexion</a>
+              <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Déconnexion</a>
             </div>
           </div>
             <?php
@@ -138,3 +197,18 @@
     </div>
   </div>
 </nav>
+
+<div class="profile-container">
+    <h1>Votre profil</h1>
+    <p><strong>Nom :</strong> <?php echo htmlspecialchars($user['user_nom']); ?></p>
+    <p><strong>Prénom :</strong> <?php echo htmlspecialchars($user['user_prenom']); ?></p>
+    <p><strong>Email :</strong> <?php echo htmlspecialchars($user['user_mail']); ?></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+</html>
+<footer>
+    <p>© PAGEC - Tous droits réservés</p>
+    <a href="../mentions.php">Mentions légales</a>
+</footer>
