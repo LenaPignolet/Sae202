@@ -11,6 +11,27 @@ a {
 
 /* NAV */
 
+#profil_logo {
+    margin: 0 10px;
+}
+
+.connection_button {
+    margin: 0 10px;
+    background-color: #03543f;
+    padding: 5px 20px;
+    border-radius: 10px;
+    font-weight: 500;
+    color: white;
+}
+
+.connection_button:hover {
+    background: #023526;
+}
+
+#logo_admin {
+    margin-left: 10px;
+}
+
 /* HOME */
 
 #home {

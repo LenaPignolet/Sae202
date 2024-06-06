@@ -1,127 +1,71 @@
-<nav class="bg-zinc-50">
-  <div class="mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-16">
-      <div class="flex">
-        <div class="-ml-2 mr-2 flex items-center md:hidden">
-          <!-- Mobile menu button -->
-          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <!--
-              Icon when menu is closed.
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+  <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+  <a href="index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="images/logo.png" class="h-8" alt="Green Garden Logo" />
+      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Green Garden</span>
+  </a>
+  
+  <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      <?php
+        if (!isset($_SESSION['id'])) {
+          ?>
+      <a class="connection_button" href="auth/formConnexion.php">Connexion</a>
+      <a class="connection_button" href="auth/formInscription.php">Inscription</a>
 
-              Heroicon name: outline/menu
+      <?php
+        }else {?>
 
-              Menu open: "hidden", Menu closed: "block"
-            -->
-            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <!--
-              Icon when menu is open.
-
-              Heroicon name: outline/x
-
-              Menu open: "block", Menu closed: "hidden"
-            -->
-            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <div class="flex-shrink-0 flex items-center">
-          <img class="hidden lg:block h-8 w-auto mr-3" src="images/logo.png" alt="Workflow">
-        </div>
-        <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-          <a href="index.php" class="bg-green-700 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Accueil</a>
-
-          <a href="liste_jardins.php" class="text-black hover:bg-green-200 opacity-50 hover:text-black px-3 py-2 rounded-md text-sm font-medium">Jardins</a>
-
-          <a href="#" class="text-black hover:bg-green-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium">Qui sommes-nous ?</a>
-
-          <a href="contact.php" class="text-black hover:bg-green-200 hover:text-black px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-        </div>
-      </div>
-      <div class="flex items-center">
-        <div class="flex-shrink-0">
-          <div id="connexion">
-            <?php
-                if(isset($_SESSION['id'])){ // Check if $_SESSION['id'] is set
-            ?>
-            
-            
-            <?php
-              }else {?>
-            <a href="auth/formConnexion.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Connexion</span></a>
-            <a href="auth/formInscription.php" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500"><span>Inscription</span></a>
-          </div>
-            
-          </div>
-
-          <!-- Profile dropdown -->
-          <div class="ml-3 relative">
-            <div>
-              <button id="photo_profil" type="button" class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full mx-10" src="images/pp/ .jpg" alt="">
-              </button>
-            </div>
-
-          <div id="profile-menu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-              <!-- Active: "bg-gray-100", Not Active: "" -->
-              <a href="profil/profil.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Profil</a>
-
-              <a href="auth/logout.php" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Déconnexion</a>
-          </div>
-          <?php
+      <button id="profil_logo" type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+        <span class="sr-only">Open user menu</span>
+        <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+      </button>
+      <?php
             }
             ?>
+      <a href="admin/gestion.php"><img id="logo_admin" src="images/admin.png" alt="Logo admin" class="h-6 w-6"></a>
+      
+      <!-- Dropdown menu -->
+      
+      <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+        
+        <div class="px-4 py-3">
+          <span class="block text-sm text-gray-900 dark:text-white"><?php ?></span>
+          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"><?php ?></span>
         </div>
-        <div class="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
-          <button type="button" class="bg-transparent p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-            <a href="admin/admin.php" class="sr-only">Admin</a>
-            <!-- Heroicon name: outline/bell -->
-            <img class="h-6 w-6 mx-10" src="images/admin.png" alt="">
-          </button>
-        </div>
+        <ul class="py-2" aria-labelledby="user-menu-button">
+          <li>
+            <a href="admin/Usagers/profil.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profil</a>
+          </li>
+          <li>
+            <a href="auth/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Se déconnecter</a>
+          </li>
+        </ul>
       </div>
-    </div>
+      
+
+      <!-- Mobile version -->
+      <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
+        <span class="sr-only">Open main menu</span>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+    </button>
   </div>
-
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="md:hidden" id="mobile-menu">
-    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-      <a href="index.php" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Accueil</a>
-
-      <a href="liste_jardins.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Jardins</a>
-
-      <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Qui sommes-nous ?</a>
-
-      <a href="contact.php" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-    </div>
-    <div class="pt-4 pb-3 border-t border-gray-700">
-      <div class="flex items-center px-5 sm:px-6">
-        <div class="flex-shrink-0">
-          <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-        </div>
-        <div class="ml-3">
-          <div class="text-base font-medium text-white">Tom Cook</div>
-          <div class="text-sm font-medium text-gray-400">tom@example.com</div>
-        </div>
-        <button type="button" class="ml-auto flex-shrink-0 bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-          <span class="sr-only">View notifications</span>
-          <!-- Heroicon name: outline/bell -->
-          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-          </svg>
-        </button>
-      </div>
-      <div class="mt-3 px-2 space-y-1 sm:px-3">
-        <a href="profil/profil.php" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Profil</a>
-
-        <a href="auth/logout.php" class="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">Déconnexion</a>
-      </div>
-    </div>
+  <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+    <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <li>
+        <a href="index.php" class="block py-2 px-3 text-white bg-green-600 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-blue-500" aria-current="page">Accueil</a>
+      </li>
+      <li>
+        <a href="liste_jardins.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Jardins</a>
+      </li>
+      <li>
+        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Qui sommes-nous ?</a>
+      </li>
+      <li>
+        <a href="contact.php" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+      </li>
+    </ul>
+  </div>
   </div>
 </nav>
