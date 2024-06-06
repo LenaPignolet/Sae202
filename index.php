@@ -6,7 +6,7 @@ require('menu.php');
     <div id="home">
         <h1>Green Garden</h1>
         <p>Semer aujourd'hui, récolter demain</p>
-        <a href="contact.php">Nous contacter</a>
+        <a href="liste_jardins.php">Réserver maintenant</a>
     </div>
 
 <?php
