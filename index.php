@@ -8,6 +8,7 @@ require('menu.php');
         <p>Semer aujourd'hui, récolter demain</p>
         <a href="liste_jardins.php">Réserver maintenant</a>
     </div>
+    <p>Bloup</p>
 
 <?php
 require('footer.php');
