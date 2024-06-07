@@ -49,9 +49,15 @@ require('menu.php');
     </div>
 
     <h1>Liste des jardins</h1>
-    
-    <?php
-        $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
+
+    <div>
+    </div>
+
+</div>
+
+
+<?php
+        $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
         $mabd->query('SET NAMES utf8;');
         $req = "SELECT * FROM Jardin";
         $resultat = $mabd->query($req);
@@ -61,7 +67,7 @@ require('menu.php');
 
             echo '<article>';
             echo '<div class="liste">' ;
-            echo '<img alt="jardin" class="img_jardin" src="images/uploads/'.$value['jardin_photo'].'">';
+            echo '<img style="width:200px;" alt="jardin" class="img_jardin" src="images/uploads/'.$value['jardin_photo'].'">';
             echo '<p>Jardin : '.$value['jardin_nom'] . '</p>';
             echo '<p>Adresse : ' . $value['jardin_coord'] . '</p>';
             echo '<p>Surface : ' . $value['jardin_surface'] . '</p>';
@@ -69,31 +75,10 @@ require('menu.php');
             echo '<hr>';
             echo '</div>';
             echo '</article>';
-
         }
         echo '</section>';
         echo '</main>';
         ?>
-
-    <div>
-    </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php
 require('footer.php');
