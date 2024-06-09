@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un jardin</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="../images/icon.jpg">
 </head>
 <body>
@@ -153,30 +155,19 @@
     <h1>Gestion de nos jardins</h1>
     <p>Ajouter un nouveau jardin</p>
     <hr>
-    <form method="POST" action="ajouter_jardin_valid.php" enctype="multipart/form-data">
-        Photo : <input type="file" name="photo"><br>
-        Nom : <input type="text" name="nom"><br>
-        Adresse : <input type="text" name="adresse"><br>
-        Surface : <input type="text" name="surface"><br>
-        Parcelle : 
-        <select name="numparcelle">
-            <?php
-            try {
-                $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
-                $mabd->query('SET NAMES utf8;');
-                $req = "SELECT * FROM Parcelle";
-                $resultat = $mabd->query($req);
-
-                foreach ($resultat as $value) {
-                    echo '<option value="' . htmlspecialchars($value['parcelle_id']) . '">' . htmlspecialchars($value['parcelle_nom']) . '</option>';
-                }
-            } catch (PDOException $e) {
-                echo "Erreur de connexion : " . $e->getMessage();
-            }
-            ?>
-        </select>
+    <form action="ajouter_jardin_valid.php" method="POST" enctype="multipart/form-data">
+        <label>Choisir une photo :</label>
+        <input type="file" name="photo"><br>
+        <label>Le nom du jardin :</label>
+        <input type="text" name="nom"><br>
+        <label>Adresse : </label>
+        <input type="text" name="adresse"><br>
+        <label>Surface (m²) : </label>
+        <input type="text" name="surface"><br>
+        <label>Nombre de parcelle : </label>
+        <input type="text" name="nParcelle"><br>
         <br>
-        <input type="submit" value="Ajouter">
+        <input type="submit" name="submit" value="Ajouter">
     </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
