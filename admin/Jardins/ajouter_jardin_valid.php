@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validation</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="bg-gray-800">
@@ -147,7 +149,7 @@
   </div>
 </nav>
 
-<a href="jardin_gestion.php">Retour au tableau de bord</a>
+<a href="gestion_jardin.php">Retour au tableau de bord</a>
 <hr>
 
 <h1 class="valide">Gestion de nos jardins</h1>
@@ -155,52 +157,71 @@
 <hr>
 
 <?php
-// Vérifiez si les données POST existent
-if(isset($_POST['nom'], $_POST['adresse'], $_POST['surface'], $_POST['numparcelle'])) {
-    // Récupération des données passées par le formulaire
-    $nom = $_POST['nom'];
-    $adresse = $_POST['adresse'];
-    $surface = $_POST['surface'];
-    $numparcelle = $_POST['numparcelle'];
+$nom = $_POST['nom'];
+$adresse = $_POST['adresse'];
+$surface = $_POST['surface'];
+$nParcelle = $_POST['nParcelle'];
 
-    // Traitement du téléchargement de la photo
-    $photo = '';
-    if (isset($_FILES['photo']) && $_FILES['photo']['error'] === 0) {
-        $photo = basename($_FILES["photo"]["name"]);
-        $target_dir = "../images/uploads/";
-        $target_file = $target_dir . $photo;
+try {
+    $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+    $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $mabd->query('SET NAMES utf8;');
+} catch (PDOException $e) {
+    echo 'Connexion échouée : ' . $e->getMessage();
+    die();
+}
 
-        if (!move_uploaded_file($_FILES["photo"]["tmp_name"], $target_file)) {
-            echo "Une erreur s'est produite lors du téléchargement de la photo.";
-            exit;
-        }
-    }
+// Vérification du format de l'image téléchargée
+$imageType = $_FILES["photo"]["type"];
+$allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
+if (!in_array($imageType, $allowedTypes)) {
+    echo '<p>Désolé, le type d\'image n\'est pas reconnu ! Seuls les formats PNG et JPEG sont autorisés.</p>';
+    die();
+}
 
-    try {
-        // Connexion à la base de données
-        $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
-        $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Création d'un nouveau nom pour cette image téléchargée pour éviter d'avoir 2 fichiers avec le même nom
+$nouvelleImage = date("Y_m_d_H_i_s") . "---" . basename($_FILES["photo"]["name"]);
+$targetDir = "/var/www/sae202/images/uploads/"; // Chemin correct vers le dossier
 
-        // Préparation de la requête SQL
-        $req = $mabd->prepare('INSERT INTO Jardin (jardin_photo, jardin_nom, jardin_coord, jardin_surface, parcelle_id) VALUES (:photo, :nom, :adresse, :surface, :numparcelle)');
-        
-        // Exécution de la requête
-        $req->bindParam(':photo', $photo);
-        $req->bindParam(':nom', $nom);
-        $req->bindParam(':adresse', $adresse);
-        $req->bindParam(':surface', $surface);
-        $req->bindParam(':numparcelle', $numparcelle);
+// Vérification si le dossier existe et est accessible
+if (!is_dir($targetDir)) {
+    echo '<p>Le dossier cible n\'existe pas. Veuillez vérifier le chemin.</p>';
+    die();
+}
 
-        $req->execute();
+$targetFilePath = $targetDir . $nouvelleImage;
 
-        echo 'Le jardin a été ajouté avec succès.';
-    } catch(PDOException $e) {
-        echo "Erreur lors de l\'ajout du jardin: " . $e->getMessage();
+// Dépôt du fichier téléchargé dans le dossier
+if (is_uploaded_file($_FILES["photo"]["tmp_name"])) {
+    if (!move_uploaded_file($_FILES["photo"]["tmp_name"], $targetFilePath)) {
+        echo '<p>Problème avec la sauvegarde de l\'image, désolé...</p>';
+        die();
     }
 } else {
-    echo "Tous les champs du formulaire doivent être remplis.";
+    echo '<p>Problème : image non chargée...</p>';
+    die();
 }
+
+// Préparation de la requête d'insertion
+$req = $mabd->prepare('INSERT INTO Jardin (jardin_photo, jardin_nom, jardin_coord, jardin_surface, jardin_n_parcelle) VALUES (:photo, :nom, :adresse, :surface, :nParcelle)');
+
+// Exécution de la requête avec les valeurs passées en paramètres
+try {
+    $resultat = $req->execute([
+        ':photo' => $nouvelleImage,
+        ':nom' => $nom,
+        ':adresse' => $adresse,
+        ':surface' => $surface,
+        ':nParcelle' => $nParcelle
+    ]);
+    echo '<p>Jardin ajouté avec succès !</p>';
+} catch (PDOException $e) {
+    echo '<p>Échec de l\'ajout du jardin : ' . $e->getMessage() . '</p>';
+}
+
 ?>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 <footer>
