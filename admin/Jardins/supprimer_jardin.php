@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supprimer un jardin</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <meta name="description" content="Jardins">
     <link rel="icon" type="image/png" href="../images/icon.jpg">
 </head>
 <body>
@@ -148,14 +151,15 @@
   </div>
 </nav>
 
-<a href="gestion_jardin.php">retour au tableau de bord</a> 	
+<a id="retour" href="gestion_jardin.php">Retour au tableau de bord</a> 	
+
 <hr> <h1>Suppression</h1> <hr>
 
 <?php
 // recupérer dans l'url l'id de l'album à supprimer
 $allJardinId = $_GET['num'];
 
-$mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
+$mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
 $mabd->query('SET NAMES utf8;');
 
 // tapez ici la requete de suppression de l'album dont l'id est passé dans l'url
@@ -163,7 +167,7 @@ $req = 'DELETE FROM Jardin WHERE jardin_id = ' . $allJardinId;
  
 $resultat = $mabd->query($req);
 
-echo '<h2>Vous venez de supprimer le jardin numéro ' . $allJardinId . '</h2>';
+echo '<h2>Vous venez de supprimer le jardin</h2>';
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
