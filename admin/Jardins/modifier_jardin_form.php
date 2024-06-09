@@ -158,7 +158,7 @@ if(isset($_GET['num'])) {
     $allJardinId = $_GET['num'];
 
     try {
-        $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
+        $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
         $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
         $req = "SELECT * FROM Jardin WHERE jardin_id = :allJardinId";
         $stmt = $mabd->prepare($req);
@@ -179,17 +179,7 @@ if(isset($_GET['num'])) {
             echo 'Jardin : <input type="text" name="nom" value="' . htmlspecialchars($allJardin['jardin_nom']) . '"><br>';
             echo 'Adresse : <input type="text" name="adresse" value="' . htmlspecialchars($allJardin['jardin_coord']) . '"><br>';
             echo 'Surface : <input type="text" name="surface" value="' . htmlspecialchars($allJardin['jardin_surface']) . '"><br>';
-            echo 'Surface : <input type="text" name="jardin_n_parcelle" value="' . htmlspecialchars($allJardin['jardin_n_parcelle']) . '"><br>';
-
-            foreach ($resultat_parcelle as $value) {
-                $selection = "";
-                if($allJardin['parcelle_id'] == $value['parcelle_id']) {  // Correction ici
-                    $selection = "selected";
-                }
-                echo '<option ' . $selection . ' value="' . htmlspecialchars($value['parcelle_id']) . '">' . htmlspecialchars($value['parcelle_nom']) . '</option>';
-            }
-
-            echo '</select><br>';
+            echo 'Nombre de parcelles : <input type="text" name="jardin_n_parcelle" value="' . htmlspecialchars($allJardin['jardin_n_parcelle']) . '"><br>';
             echo '<input type="submit" value="Modifier">';
             echo '</form>';
         } else {
