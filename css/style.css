@@ -80,17 +80,31 @@ a {
 }
 
 
-
 /* LISTE JARDINS */
 
-#controls-carousel {
-    z-index: -1000;
+#banniere {
+    background: url('../images/img1.jpg');
+    background-size: 110vw auto;
+    background-position: -50px;
+    height: 50vh;
+}
+
+#banniere h2 {
+    font-size: 2.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    font-family: "Archivo Black", sans-serif;
+    display: flex;
+    justify-content: center;
+    padding-top: 9%;
 }
 
 #listeJardin h1 {
     text-align: center;
     font-weight: 500;
     font-size: 1.2em;
+    padding-top: 2%;
 }
 
 
@@ -98,23 +112,70 @@ a {
 /* CONTACT */
 
 #contact {
-    height: 92vh;
+    height: 82.7vh;
+    background: url('../images/img2.jpg') center no-repeat fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #contact form {
-    padding-top: 12%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    padding: 2%;
+    border-radius: 2%;
 }
 
 #contact form h1 {
     text-align: center;
-    font-weight: 500;
-    font-size: 1.2em;
+    font-weight: 400;
+    font-family: "Jomhuria", serif;
+    font-size: 3em;
+    letter-spacing: 0.02em;
 }
 
-@media screen and (max-width:780px){
-    #contact form {
-        padding-top: 28%;
-    }
+#contact form textarea {
+    width: 25vw;
+}
+
+/* CONNEXION */
+
+#connexion {
+    background: url('../images/background_connect.jpg');
+    height: 82.7vh;
+    opacity: 0.85;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    height: fit-content;
+    width: 35vw;
+    background: white;
+    padding: 1.5%;
+    border-radius: 10px;
+}
+
+.login-container h2 {
+    font-weight: 400;
+    font-family: "Jomhuria", serif;
+    font-size: 3em;
+    text-align: center;
+}
+
+.submit input{
+    background-color: #03543f;
+    color: white;
+    padding: 1.5%;
+    margin-top: 5%;
+    width: 100%;
+    border-radius: 5px;
 }
 
 /* FOOTER */
@@ -130,7 +191,8 @@ footer {
 }
 
 footer a {
-    margin-left: 1%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
 }
 
 footer a:hover {
