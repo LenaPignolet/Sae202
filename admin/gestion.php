@@ -92,34 +92,34 @@
                                             <div class="detail">
                                                 <p class="detail-subtitle">Nombre total des jardins</p>
                                                 <?php
-                                                    // Connexion à la base de données
-                                                    $servername = "localhost";
-                                                    $username = "Usersae202";
-                                                    $password = "123";
-                                                    $database = "sae202Base";
+                                                // Connexion à la base de données
+                                                $servername = "localhost";
+                                                $username = "Usersae202";
+                                                $password = "123";
+                                                $database = "sae202Base";
 
-                                                    $conn = new mysqli($servername, $username, $password, $database);
+                                                $conn = new mysqli($servername, $username, $password, $database);
 
-                                                    // Vérifier la connexion
-                                                    if ($conn->connect_error) {
-                                                        die("Échec de la connexion : " . $conn->connect_error);
-                                                    }
+                                                // Vérifier la connexion
+                                                if ($conn->connect_error) {
+                                                    die("Échec de la connexion : " . $conn->connect_error);
+                                                }
 
-                                                    // Requête SQL pour compter le nombre total de jardins
-                                                    $sql = "SELECT COUNT(*) AS total_parcelle FROM Jardin";
-                                                    $result = $conn->query($sql);
+                                                // Requête SQL pour compter le nombre total de jardins
+                                                $sql = "SELECT COUNT(*) AS total_parcelle FROM Jardin";
+                                                $result = $conn->query($sql);
 
-                                                    if ($result->num_rows > 0) {
-                                                        // Récupérer le résultat
-                                                        $row = $result->fetch_assoc();
-                                                        $total_parcelle = $row["total_parcelle"];
-                                                        echo "<span class='number'>" . $total_parcelle . "</span>";
-                                                    } else {
-                                                        echo "Aucun jardin trouvé.";
-                                                    }
+                                                if ($result->num_rows > 0) {
+                                                    // Récupérer le résultat
+                                                    $row = $result->fetch_assoc();
+                                                    $total_parcelle = $row["total_parcelle"];
+                                                    echo "<span class='number'>" . $total_parcelle . "</span>";
+                                                } else {
+                                                    echo "Aucun jardin trouvé.";
+                                                }
 
-                                                    // Fermer la connexion
-                                                    $conn->close();
+                                                // Fermer la connexion
+                                                $conn->close();
                                                 ?>
                                             </div>
                                         </div>
@@ -133,41 +133,42 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="icon-big text-center">
-                                            <i class="fas fa-cubes" style="color: #8a460f;"></i>
+                                                <i class="fas fa-cubes" style="color: #8a460f;"></i>
                                             </div>
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="detail">
                                                 <p class="detail-subtitle">Nombre total des parcelles</p>
+
                                                 <?php
-                                                    // Connexion à la base de données
-                                                    $servername = "localhost";
-                                                    $username = "Usersae202";
-                                                    $password = "123";
-                                                    $database = "sae202Base";
+                                                
+                                                $servername = "localhost";
+                                                $username = "Usersae202";
+                                                $password = "123";
+                                                $database = "sae202Base";
 
-                                                    $conn = new mysqli($servername, $username, $password, $database);
+                                                $conn = new mysqli($servername, $username, $password, $database);
 
-                                                    // Vérifier la connexion
-                                                    if ($conn->connect_error) {
-                                                        die("Échec de la connexion : " . $conn->connect_error);
-                                                    }
+                                                
+                                                if ($conn->connect_error) {
+                                                    die("Échec de la connexion : " . $conn->connect_error);
+                                                }
 
-                                                    // Requête SQL pour compter le nombre total de parcelles
-                                                    $sql = "SELECT COUNT(*) AS total_parcelle FROM Parcelle";
-                                                    $result = $conn->query($sql);
+                                                
+                                                $sql = "SELECT COUNT(*) AS total_parcelle FROM Parcelle";
+                                                $result = $conn->query($sql);
 
-                                                    if ($result->num_rows > 0) {
-                                                        // Récupérer le résultat
-                                                        $row = $result->fetch_assoc();
-                                                        $total_parcelle = $row["total_parcelle"];
-                                                        echo "<span class='number'>" . $total_parcelle . "</span>";
-                                                    } else {
-                                                        echo "Aucun jardin trouvé.";
-                                                    }
+                                                if ($result->num_rows > 0) {
+                                                   
+                                                    $row = $result->fetch_assoc();
+                                                    $total_parcelle = $row["total_parcelle"];
+                                                    echo "<span class='number'>" . $total_parcelle . "</span>";
+                                                } else {
+                                                    echo "Aucun jardin trouvé.";
+                                                }
 
-                                                    // Fermer la connexion
-                                                    $conn->close();
+                                                
+                                                $conn->close();
                                                 ?>
                                             </div>
                                         </div>
@@ -181,42 +182,42 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="icon-big text-center">
-                                            <i class="fas fa-users" style="color: #74C0FC;"></i>
+                                                <i class="fas fa-users" style="color: #74C0FC;"></i>
                                             </div>
                                         </div>
                                         <div class="col-sm-8">
                                             <div class="detail">
                                                 <p class="detail-subtitle">Nombre total des utilisateurs</p>
                                                 <?php
-                                                    // Connexion à la base de données
-                                                    $servername = "localhost";
-                                                    $username = "Usersae202";
-                                                    $password = "123";
-                                                    $database = "sae202Base";
+                                                // Connexion à la base de données
+                                                $servername = "localhost";
+                                                $username = "Usersae202";
+                                                $password = "123";
+                                                $database = "sae202Base";
 
-                                                    $conn = new mysqli($servername, $username, $password, $database);
+                                                $conn = new mysqli($servername, $username, $password, $database);
 
-                                                    // Vérifier la connexion
-                                                    if ($conn->connect_error) {
-                                                        die("Échec de la connexion : " . $conn->connect_error);
-                                                    }
+                                                
+                                                if ($conn->connect_error) {
+                                                    die("Échec de la connexion : " . $conn->connect_error);
+                                                }
 
-                                                    // Requête SQL pour compter le nombre total d'utilisateurs
-                                                    //modifie ca pour qu'il convienne ton code et ta base de données
-                                                    $sql = "SELECT COUNT(*) AS total_user FROM User";
-                                                    $result = $conn->query($sql);
+                                                
+                                                //modifie ca pour qu'il convienne ton code et ta base de données
+                                                $sql = "SELECT COUNT(*) AS total_user FROM User";
+                                                $result = $conn->query($sql);
 
-                                                    if ($result->num_rows > 0) {
-                                                        // Récupérer le résultat
-                                                        $row = $result->fetch_assoc();
-                                                        $total_user = $row["total_user"];
-                                                        echo "<span class='number'>" . $total_user . "</span>";
-                                                    } else {
-                                                        echo "Aucun jardin trouvé.";
-                                                    }
+                                                if ($result->num_rows > 0) {
+                                                   
+                                                    $row = $result->fetch_assoc();
+                                                    $total_user = $row["total_user"];
+                                                    echo "<span class='number'>" . $total_user . "</span>";
+                                                } else {
+                                                    echo "Aucun jardin trouvé.";
+                                                }
 
-                                                    // Fermer la connexion
-                                                    $conn->close();
+                                                
+                                                $conn->close();
                                                 ?>
                                             </div>
                                         </div>
@@ -224,12 +225,12 @@
                                 </div>
                             </div>
                         </div>
-    </div>
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/vendor/chartsjs/Chart.min.js"></script>
-    <script src="assets/js/dashboard-charts.js"></script>
-    <script src="assets/js/script.js"></script>
+                    </div>
+                    <script src="assets/vendor/jquery/jquery.min.js"></script>
+                    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                    <script src="assets/vendor/chartsjs/Chart.min.js"></script>
+                    <script src="assets/js/dashboard-charts.js"></script>
+                    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
