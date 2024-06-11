@@ -72,7 +72,7 @@
             <div class="content">
                 <div class="container">
                     <div class="page-title">
-                        <h3>Gestion les Parcelles</h3>
+                        <h3>Gestion les parcelles</h3>
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
@@ -84,7 +84,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
-                                                <th>Dispobible</th>
+                                                <th>Disponible</th>
                                                 <th>Modifier</th>
                                                 <th>Supprimer</th>
                                             </tr>
@@ -100,7 +100,6 @@
                                                 echo '<tr>';
                                                 echo '<td>' . htmlspecialchars($value['parcelle_nom']) . '</td>';
 
-                                                // Conversion de la valeur de 'disponible' en texte "Oui" ou "Non"
                                                 $disponible = $value['disponible'] == 1 ? 'Oui' : 'Non';
                                                 echo '<td>' . htmlspecialchars($disponible) . '</td>';
 
