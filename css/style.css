@@ -178,6 +178,69 @@ a {
     border-radius: 5px;
 }
 
+/* ADMIN */
+
+.admin {
+    height: 85vh;
+    background: rgb(214, 214, 214);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.backoffice {
+    background: white;
+}
+
+#backoffice_gestion {
+    width: 1090px;
+    margin: 0 auto;
+    padding-bottom: 1%;
+}
+
+.gestion {
+    width: 1100px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.gestion_user {
+    background: white;
+    margin: 0 0.5%;
+    padding: 2% 0;
+    text-align: center;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.gestion_user img{
+    width: 300px;
+    height: auto;
+    margin: 0 7% 5% 7%;;
+    border: solid 1px #c0c0c0;
+    border-radius: 8px;
+}
+
+.gestion_button {
+    background: #03543f;
+    margin: 0 auto;
+    color: white;
+    padding: 2%;
+    width: 300px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.gestion_button a {
+    background: transparent;
+}
+
+.gestion_button:hover {
+    background: #023526;
+}
+
+
 /* FOOTER */
 
 footer {
