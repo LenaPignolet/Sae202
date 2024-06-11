@@ -1,118 +1,235 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<!-- 
+* Bootstrap Simple Admin Template
+* Version: 2.1
+* Author: Alexis Luna
+* Website: https://github.com/alexis-luna/bootstrap-simple-admin-template
+-->
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sae 202</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
-    <script src="js/index.js" defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Page admin">
+    <title>Dashboard</title>
+    <link href="assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
+    <link href="assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/master.css" rel="stylesheet">
+    <link href="assets/vendor/flagiconcss/css/flag-icon.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/logo.png">
 </head>
 
-<?php 
-require('../menu.php');
-?>
-
 <body>
-
-<div class="admin">
-    <div id="backoffice_gestion">
-            <dl class="grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
-            <div class="px-4 py-5 sm:p-6">
-            <dt class="text-base font-normal text-gray-900">Total d'utilisateurs</dt>
-            <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                71,897
-                </div>
-
-                <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg class="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                <span class="sr-only"> Increased by </span>
-                12%
-                </div>
-            </dd>
+    <div class="wrapper">
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <img src="assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
             </div>
+            <ul class="list-unstyled components text-secondary">
+                <li>
+                    <a href="gestion.php"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
 
-            <div class="px-4 py-5 sm:p-6">
-            <dt class="text-base font-normal text-gray-900">Nb de jardins</dt>
-            <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                58.16%
-                </div>
+                <li>
+                    <a href="./Jardins/gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                </li>
 
-                <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800 md:mt-2 lg:mt-0">
-                <svg class="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-                <span class="sr-only"> Increased by </span>
-                2.02%
-                </div>
-            </dd>
-            </div>
+                <li>
+                    <a href="./Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                </li>
 
-            <div class="px-4 py-5 sm:p-6">
-            <dt class="text-base font-normal text-gray-900">Total des réservations</dt>
-            <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                24.57%
-                </div>
+                <li>
+                    <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                </li>
 
-                <div class="inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800 md:mt-2 lg:mt-0">
-                <svg class="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-                <span class="sr-only"> Decreased by </span>
-                4.05%
+                <li>
+                    <a href="../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                </li>
+
+            </ul>
+        </nav>
+        <div id="body" class="active">
+            <!-- navbar navigation component -->
+            <nav class="navbar navbar-expand-lg navbar-white bg-white">
+                <button title="menu" type="button" id="sidebarCollapse" class="btn btn-light">
+                    <i class="fas fa-bars"></i><span></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <div class="nav-dropdown">
+                                <div class="dropdown-menu dropdown-menu-end nav-link-menu" aria-labelledby="nav1">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </dd>
-            </div>
-            </dl>
+            </nav>
+
+            <!-- end of navbar navigation -->
+            <div class="content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 page-header">
+                            <div class="page-pretitle">Overview</div>
+                            <h2 class="page-title">Dashboard</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="icon-big text-center">
+                                                <i class="fas fa-seedling" style="color: #03543F;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="detail">
+                                                <p class="detail-subtitle">Nombre total des jardins</p>
+                                                <?php
+                                                    // Connexion à la base de données
+                                                    $servername = "localhost";
+                                                    $username = "Usersae202";
+                                                    $password = "123";
+                                                    $database = "sae202Base";
+
+                                                    $conn = new mysqli($servername, $username, $password, $database);
+
+                                                    // Vérifier la connexion
+                                                    if ($conn->connect_error) {
+                                                        die("Échec de la connexion : " . $conn->connect_error);
+                                                    }
+
+                                                    // Requête SQL pour compter le nombre total de jardins
+                                                    $sql = "SELECT COUNT(*) AS total_parcelle FROM Jardin";
+                                                    $result = $conn->query($sql);
+
+                                                    if ($result->num_rows > 0) {
+                                                        // Récupérer le résultat
+                                                        $row = $result->fetch_assoc();
+                                                        $total_parcelle = $row["total_parcelle"];
+                                                        echo "<span class='number'>" . $total_parcelle . "</span>";
+                                                    } else {
+                                                        echo "Aucun jardin trouvé.";
+                                                    }
+
+                                                    // Fermer la connexion
+                                                    $conn->close();
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="icon-big text-center">
+                                            <i class="fas fa-cubes" style="color: #8a460f;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="detail">
+                                                <p class="detail-subtitle">Nombre total des parcelles</p>
+                                                <?php
+                                                    // Connexion à la base de données
+                                                    $servername = "localhost";
+                                                    $username = "Usersae202";
+                                                    $password = "123";
+                                                    $database = "sae202Base";
+
+                                                    $conn = new mysqli($servername, $username, $password, $database);
+
+                                                    // Vérifier la connexion
+                                                    if ($conn->connect_error) {
+                                                        die("Échec de la connexion : " . $conn->connect_error);
+                                                    }
+
+                                                    // Requête SQL pour compter le nombre total de parcelles
+                                                    $sql = "SELECT COUNT(*) AS total_parcelle FROM Parcelle";
+                                                    $result = $conn->query($sql);
+
+                                                    if ($result->num_rows > 0) {
+                                                        // Récupérer le résultat
+                                                        $row = $result->fetch_assoc();
+                                                        $total_parcelle = $row["total_parcelle"];
+                                                        echo "<span class='number'>" . $total_parcelle . "</span>";
+                                                    } else {
+                                                        echo "Aucun jardin trouvé.";
+                                                    }
+
+                                                    // Fermer la connexion
+                                                    $conn->close();
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="icon-big text-center">
+                                            <i class="fas fa-users" style="color: #74C0FC;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="detail">
+                                                <p class="detail-subtitle">Nombre total des utilisateurs</p>
+                                                <?php
+                                                    // Connexion à la base de données
+                                                    $servername = "localhost";
+                                                    $username = "Usersae202";
+                                                    $password = "123";
+                                                    $database = "sae202Base";
+
+                                                    $conn = new mysqli($servername, $username, $password, $database);
+
+                                                    // Vérifier la connexion
+                                                    if ($conn->connect_error) {
+                                                        die("Échec de la connexion : " . $conn->connect_error);
+                                                    }
+
+                                                    // Requête SQL pour compter le nombre total d'utilisateurs
+                                                    //modifie ca pour qu'il convienne ton code et ta base de données
+                                                    $sql = "SELECT COUNT(*) AS total_user FROM User";
+                                                    $result = $conn->query($sql);
+
+                                                    if ($result->num_rows > 0) {
+                                                        // Récupérer le résultat
+                                                        $row = $result->fetch_assoc();
+                                                        $total_user = $row["total_user"];
+                                                        echo "<span class='number'>" . $total_user . "</span>";
+                                                    } else {
+                                                        echo "Aucun jardin trouvé.";
+                                                    }
+
+                                                    // Fermer la connexion
+                                                    $conn->close();
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
     </div>
-    <div class="gestion">
-        <div class="gestion_user">
-            <img src="../images/gestion_jardins.jpg" alt="">
-            <div class="gestion_button" id="gJardins">
-                <a href="Jardins/jardin_gestion.php" class="gestion_button">Gestion des jardins</a>
-            </div>
-        </div>
-        <div class="gestion_user">
-            <img src="../images/gestion_user.jpg" alt="">
-            <div class="gestion_button" id="gUser">
-                <a href="Usagers/user_gestion.php" class="gestion_button">Gestion des utilisateurs</a>
-            </div>
-        </div>
-        <div class="gestion_user">
-            <img src="../images/gestion_parcelle.jpg" alt="">
-            <div class="gestion_button" id="gParcelle">
-                <a href="Parcelle/parcelle_gestion.php" class="gestion_button">Gestion des parcelles</a>
-            </div>
-        </div>
-    </div>
-    
-    
-    
-</div>
-
-
-
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chartsjs/Chart.min.js"></script>
+    <script src="assets/js/dashboard-charts.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
-<script>
-        document.getElementById('gJardins').addEventListener('click', function(event) {
-            window.location.href = 'Jardins/jardin_gestion.php'; 
-        });
 
-        document.getElementById('gUser').addEventListener('click', function() {
-            window.location.href('Usagers/user_gestion.php');
-        });
-
-        document.getElementById('gParcelle').addEventListener('click', function() {
-            window.location.href('Parcelle/parcelle_gestion.php');
-        });
-        </script>
-<?php
-require('../footer.php');
-?>
+</html>
