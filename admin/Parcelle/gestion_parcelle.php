@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<div class="wrapper">
+    <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
                 <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
@@ -69,59 +69,60 @@
                 </div>
             </nav>
             <!-- end of navbar navigation component -->
-<div class="content">
-<div class="container">
-<div class="page-title">
-<h3>Gestion les Parcelles</h3>
-</div>
-<div class="row">
-<div class="col-md-12 col-lg-12">
-<div class="card">
-<div class="card-header"><a href="ajouter_parcelle_form.php" style="color: #03543F; background-color: #fffff1; padding: 6px; border-radius: 3px;">Ajouter une parcelle <i class="fas fa-plus" style="color: #03543F;"></i></a></div>
-<div class="card-body">
-<p class="card-title"></p>
-<table class="table table-hover" id="dataTables-example" width="100%">
-    <thead>
-        <tr>
-            <th>Nom</th>
-            <th>Dispobible</th>
-            <th>Modifier</th>
-            <th>Supprimer</th>
-        </tr>
-    </thead>
-        <tbody>
-        <?php
-            $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
-            $mabd->query('SET NAMES utf8;');
-            $req = "SELECT * FROM Parcelle";
-            $resultat = $mabd->query($req);
+            <div class="content">
+                <div class="container">
+                    <div class="page-title">
+                        <h3>Gestion les Parcelles</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="card">
+                                <div class="card-header"><a href="ajouter_parcelle_form.php" style="color: #03543F; background-color: #fffff1; padding: 6px; border-radius: 3px;">Ajouter une parcelle <i class="fas fa-plus" style="color: #03543F;"></i></a></div>
+                                <div class="card-body">
+                                    <p class="card-title"></p>
+                                    <table class="table table-hover" id="dataTables-example" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Dispobible</th>
+                                                <th>Modifier</th>
+                                                <th>Supprimer</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+                                            $mabd->query('SET NAMES utf8;');
+                                            $req = "SELECT * FROM Parcelle";
+                                            $resultat = $mabd->query($req);
 
-            foreach ($resultat as $value) {
-                echo '<tr>';
-                echo '<td>' . htmlspecialchars($value['parcelle_nom']) . '</td>';
-                
-                // Conversion de la valeur de 'disponible' en texte "Oui" ou "Non"
-                $disponible = $value['disponible'] == 1 ? 'Oui' : 'Non';
-                echo '<td>' . htmlspecialchars($disponible) . '</td>';
+                                            foreach ($resultat as $value) {
+                                                echo '<tr>';
+                                                echo '<td>' . htmlspecialchars($value['parcelle_nom']) . '</td>';
 
-                echo '<td><a class="btn btn-outline-info btn-rounded" aria-label="Modifier" href="modifier_parcelle_form.php?num='. $value['parcelle_id'] .'"><i class="fas fa-pen"></i></a></td>';
-                echo '<td><a class="btn btn-outline-danger btn-rounded" aria-label="Supprimer" href="supprimer_parcelle.php?num='. $value['parcelle_id'] .'"><i class="fas fa-trash"></i></a></td>';
-                echo '</tr>';
-            }
-        ?>
-        </tbody>
-    </table>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script src="../assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/vendor/datatables/datatables.min.js"></script>
-    <script src="../assets/js/initiate-datatables.js"></script>
-    <script src="../assets/js/script.js"></script>
+                                                // Conversion de la valeur de 'disponible' en texte "Oui" ou "Non"
+                                                $disponible = $value['disponible'] == 1 ? 'Oui' : 'Non';
+                                                echo '<td>' . htmlspecialchars($disponible) . '</td>';
+
+                                                echo '<td><a class="btn btn-outline-info btn-rounded" aria-label="Modifier" href="modifier_parcelle_form.php?num=' . $value['parcelle_id'] . '"><i class="fas fa-pen"></i></a></td>';
+                                                echo '<td><a class="btn btn-outline-danger btn-rounded" aria-label="Supprimer" href="supprimer_parcelle.php?num=' . $value['parcelle_id'] . '"><i class="fas fa-trash"></i></a></td>';
+                                                echo '</tr>';
+                                            }
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../assets/vendor/jquery/jquery.min.js"></script>
+        <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/vendor/datatables/datatables.min.js"></script>
+        <script src="../assets/js/initiate-datatables.js"></script>
+        <script src="../assets/js/script.js"></script>
 </body>
+
 </html>
