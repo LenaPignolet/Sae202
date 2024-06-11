@@ -22,9 +22,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="/images/logo.png">
 </head>
+
 <body>
-  
-<div class="wrapper">
+
+    <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
                 <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
@@ -69,42 +70,42 @@
                     </ul>
                 </div>
             </nav>
-<div class="content">
-    <div class="container">
-          <div class="page-title">
-              <h3>Vous venez de supprimer un jardin</h3>
-          </div>
-          <div class="box box-primary">
+            <div class="content">
+                <div class="container">
+                    <div class="page-title">
+                        <h3>Vous venez de supprimer un jardin</h3>
+                    </div>
+                    <div class="box box-primary">
                         <div class="box-body">
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
                                     <div class="col-md-6">
 
-<?php
-// recupérer dans l'url l'id de l'album à supprimer
-$allJardinId = $_GET['num'];
+                                        <?php
+                                        // recupérer dans l'url l'id de l'album à supprimer
+                                        $allJardinId = $_GET['num'];
 
-$mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
-$mabd->query('SET NAMES utf8;');
+                                        $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+                                        $mabd->query('SET NAMES utf8;');
 
-// tapez ici la requete de suppression de l'album dont l'id est passé dans l'url
-$req = 'DELETE FROM Jardin WHERE jardin_id = ' . $allJardinId;
- 
-$resultat = $mabd->query($req);
+                                        // tapez ici la requete de suppression de l'album dont l'id est passé dans l'url
+                                        $req = 'DELETE FROM Jardin WHERE jardin_id = ' . $allJardinId;
 
-echo '<p>Suppression du jardin réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
-echo "<br>";
-echo '<a  class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
-?>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script src="../assets/vendor/jquery/jquery.min.js"></script>
-<script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/script.js"></script>
+                                        $resultat = $mabd->query($req);
+
+                                        echo '<p>Suppression du jardin réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
+                                        echo "<br>";
+                                        echo '<a  class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="../assets/vendor/jquery/jquery.min.js"></script>
+                <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="../assets/js/script.js"></script>
 </body>
 
 </html>
