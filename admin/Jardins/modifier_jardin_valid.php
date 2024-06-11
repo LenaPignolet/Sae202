@@ -22,9 +22,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" type="image/png" href="/images/logo.png">
 </head>
+
 <body>
-  
-<div class="wrapper">
+
+    <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
                 <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
@@ -69,117 +70,117 @@
                     </ul>
                 </div>
             </nav>
-<div class="content">
-    <div class="container">
-          <div class="page-title">
-              <h3>Vous venez de modifier un jardin</h3>
-          </div>
-          <div class="box box-primary">
+            <div class="content">
+                <div class="container">
+                    <div class="page-title">
+                        <h3>Vous venez de modifier un jardin</h3>
+                    </div>
+                    <div class="box box-primary">
                         <div class="box-body">
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
                                     <div class="col-md-6">
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $allJardin = $_POST['num'];
-    $nom = $_POST['nom'];
-    $coord = $_POST['adresse'];
-    $surface = $_POST['surface'];
-    $nParcelle = $_POST['jardin_n_parcelle'];
+                                        <?php
+                                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                            $allJardin = $_POST['num'];
+                                            $nom = $_POST['nom'];
+                                            $coord = $_POST['adresse'];
+                                            $surface = $_POST['surface'];
+                                            $nParcelle = $_POST['jardin_n_parcelle'];
 
-    // Connexion à la base de données
-    try {
-        $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
-        $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        echo 'Connexion échouée : ' . $e->getMessage();
-        die();
-    }
+                                            // Connexion à la base de données
+                                            try {
+                                                $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+                                                $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                            } catch (PDOException $e) {
+                                                echo 'Connexion échouée : ' . $e->getMessage();
+                                                die();
+                                            }
 
-    if (isset($_FILES['nouvelle_photo']) && $_FILES['nouvelle_photo']['error'] === UPLOAD_ERR_OK) {
-        $fileTmpPath = $_FILES['nouvelle_photo']['tmp_name'];
-        $fileName = $_FILES['nouvelle_photo']['name'];
-        $fileSize = $_FILES['nouvelle_photo']['size'];
-        $fileType = $_FILES['nouvelle_photo']['type'];
-
-
-        $allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-        if (!in_array($fileType, $allowedMimeTypes)) {
-            echo "Seuls les formats PNG et JPEG sont autorisés.";
-            die();
-        }
+                                            if (isset($_FILES['nouvelle_photo']) && $_FILES['nouvelle_photo']['error'] === UPLOAD_ERR_OK) {
+                                                $fileTmpPath = $_FILES['nouvelle_photo']['tmp_name'];
+                                                $fileName = $_FILES['nouvelle_photo']['name'];
+                                                $fileSize = $_FILES['nouvelle_photo']['size'];
+                                                $fileType = $_FILES['nouvelle_photo']['type'];
 
 
-        $nouvelle_photo = date("Y_m_d_H_i_s") . "---" . basename($fileName);
-        $target_dir = "/var/www/sae202/images/uploads/";
-        $target_file = $target_dir . $nouvelle_photo;
+                                                $allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+                                                if (!in_array($fileType, $allowedMimeTypes)) {
+                                                    echo "Seuls les formats PNG et JPEG sont autorisés.";
+                                                    die();
+                                                }
 
 
-        if (move_uploaded_file($fileTmpPath, $target_file)) {
-
-            try {
-                $req = "UPDATE Jardin SET jardin_photo = :nouvelle_photo, jardin_nom = :nom, jardin_coord = :adresse, jardin_surface = :surface, jardin_n_parcelle = :nParcelle WHERE jardin_id = :allJardin";
-                $stmt = $mabd->prepare($req);
-                $stmt->execute([
-                    'nouvelle_photo' => $nouvelle_photo,
-                    'nom' => $nom,
-                    'adresse' => $coord,
-                    'surface' => $surface,
-                    'nParcelle' => $nParcelle,
-                    'allJardin' => $allJardin
-                ]);
-
-                echo '<p>Modification du jardin réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
-                echo "<br>";
-                echo '<a  class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
-            } catch (PDOException $e) {
-                echo "Erreur : " . $e->getMessage();
-            }
-        } else {
-            echo "Une erreur s'est produite lors du téléchargement du fichier.";
-        }
-    } else {
-
-        if (isset($_POST['nouvelle_photo_old'])) {
-            $nouvelle_photo = $_POST['nouvelle_photo_old'];
-        } else {
-            echo "Erreur : ancienne photo non spécifiée.";
-            die();
-        }
+                                                $nouvelle_photo = date("Y_m_d_H_i_s") . "---" . basename($fileName);
+                                                $target_dir = "/var/www/sae202/images/uploads/";
+                                                $target_file = $target_dir . $nouvelle_photo;
 
 
-        try {
-            $req = "UPDATE Jardin SET jardin_nom = :nom, jardin_coord = :adresse, jardin_surface = :surface, jardin_n_parcelle = :nParcelle WHERE jardin_id = :allJardin";
-            $stmt = $mabd->prepare($req);
-            $stmt->execute([
-                'nom' => $nom,
-                'adresse' => $coord,
-                'surface' => $surface,
-                'nParcelle' => $nParcelle,
-                'allJardin' => $allJardin
-            ]);
+                                                if (move_uploaded_file($fileTmpPath, $target_file)) {
 
-            echo '<p>Modification du jardin réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
-            echo "<br>";
-            echo '<a  class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
-        } catch (PDOException $e) {
-            echo "Erreur : " . $e->getMessage();
-        }
-    }
-} else {
-    echo "<p>Méthode non autorisée.</p>";
-}
-?>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script src="../assets/vendor/jquery/jquery.min.js"></script>
-    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/script.js"></script>
+                                                    try {
+                                                        $req = "UPDATE Jardin SET jardin_photo = :nouvelle_photo, jardin_nom = :nom, jardin_coord = :adresse, jardin_surface = :surface, jardin_n_parcelle = :nParcelle WHERE jardin_id = :allJardin";
+                                                        $stmt = $mabd->prepare($req);
+                                                        $stmt->execute([
+                                                            'nouvelle_photo' => $nouvelle_photo,
+                                                            'nom' => $nom,
+                                                            'adresse' => $coord,
+                                                            'surface' => $surface,
+                                                            'nParcelle' => $nParcelle,
+                                                            'allJardin' => $allJardin
+                                                        ]);
+
+                                                        echo '<p>Modification du jardin réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
+                                                        echo "<br>";
+                                                        echo '<a  class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
+                                                    } catch (PDOException $e) {
+                                                        echo "Erreur : " . $e->getMessage();
+                                                    }
+                                                } else {
+                                                    echo "Une erreur s'est produite lors du téléchargement du fichier.";
+                                                }
+                                            } else {
+
+                                                if (isset($_POST['nouvelle_photo_old'])) {
+                                                    $nouvelle_photo = $_POST['nouvelle_photo_old'];
+                                                } else {
+                                                    echo "Erreur : ancienne photo non spécifiée.";
+                                                    die();
+                                                }
+
+
+                                                try {
+                                                    $req = "UPDATE Jardin SET jardin_nom = :nom, jardin_coord = :adresse, jardin_surface = :surface, jardin_n_parcelle = :nParcelle WHERE jardin_id = :allJardin";
+                                                    $stmt = $mabd->prepare($req);
+                                                    $stmt->execute([
+                                                        'nom' => $nom,
+                                                        'adresse' => $coord,
+                                                        'surface' => $surface,
+                                                        'nParcelle' => $nParcelle,
+                                                        'allJardin' => $allJardin
+                                                    ]);
+
+                                                    echo '<p>Modification du jardin réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
+                                                    echo "<br>";
+                                                    echo '<a  class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
+                                                } catch (PDOException $e) {
+                                                    echo "Erreur : " . $e->getMessage();
+                                                }
+                                            }
+                                        } else {
+                                            echo "<p>Méthode non autorisée.</p>";
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script src="../assets/vendor/jquery/jquery.min.js"></script>
+                <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <script src="../assets/js/script.js"></script>
 </body>
 
 </html>
