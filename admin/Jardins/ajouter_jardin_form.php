@@ -20,9 +20,9 @@
     <link href="../assets/css/master.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/images/logo.png">
 </head>
+
 <body>
-  
-<div class="wrapper">
+    <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
                 <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
@@ -31,25 +31,21 @@
                 <li>
                     <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
-
                 <li>
                     <a href="gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
-
                 <li>
                     <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
-
                 <li>
                     <a href="../Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
-
                 <li>
                     <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
-
             </ul>
         </nav>
+
         <div id="body" class="active">
             <!-- navbar navigation component -->
             <nav class="navbar navbar-expand-lg navbar-white bg-white">
@@ -68,7 +64,8 @@
                 </div>
             </nav>
             <!-- end of navbar navigation component -->
-<div class="content">
+
+            <div class="content">
                 <div class="container">
                     <div class="page-title">
                         <h3>Ajouter un nouveau jardin</h3>
@@ -78,44 +75,46 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
                                     <div class="col-md-6">
-                                    <form action="ajouter_jardin_valid.php" method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-        <label class="form-label">Choisir une photo</label>
-        <input id="formFile1" class="form-control" type="file" name="photo">
-        </div>
-        <br>
-        <div class="mb-3">
-        <label class="form-label">Le nom du jardin</label>
-        <input class="form-control" type="text" name="nom">
-        </div>
-        <br>
-        <div class="mb-3">
-        <label class="form-label">Adresse</label>
-        <input class="form-control" type="text" name="adresse">
-        </div>
-        <br>
-        <div class="mb-3">
-        <label class="form-label">Surface (m²)</label>
-        <input class="form-control" type="text" name="surface">
-        </div>
-        <br>
-        <div class="mb-3">
-        <label class="form-label">Nombre de parcelle</label>
-        <input class="form-control" type="text" name="nParcelle">
-        </div>
-        <br>
-        <div class="mb-3 text-end">
-        <input class="btn btn-success" type="submit" name="submit" value="Ajouter">
-        </div>
-    </form>
- 
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                                        <form action="ajouter_jardin_valid.php" method="POST" enctype="multipart/form-data">
+                                            <div class="mb-3">
+                                                <label class="form-label">Choisir une photo</label>
+                                                <input id="formFile1" class="form-control" type="file" name="photo">
+                                            </div>
+                                            <br>
+                                            <div class="mb-3">
+                                                <label class="form-label">Le nom du jardin</label>
+                                                <input class="form-control" type="text" name="nom">
+                                            </div>
+                                            <br>
+                                            <div class="mb-3">
+                                                <label class="form-label">Adresse</label>
+                                                <input class="form-control" type="text" name="adresse">
+                                            </div>
+                                            <br>
+                                            <div class="mb-3">
+                                                <label class="form-label">Surface (m²)</label>
+                                                <input class="form-control" type="text" name="surface">
+                                            </div>
+                                            <br>
+                                            <div class="mb-3">
+                                                <label class="form-label">Nombre de parcelle</label>
+                                                <input class="form-control" type="text" name="nParcelle">
+                                            </div>
+                                            <br>
+                                            <div class="mb-3 text-end">
+                                                <input class="btn btn-success" type="submit" name="submit" value="Ajouter">
+                                            </div>
+                                        </form>
+                                    </div> <!-- Fin de .col-md-6 -->
+                                </div> <!-- Fin de .tab-pane -->
+                            </div> <!-- Fin de .tab-content -->
+                        </div> <!-- Fin de .box-body -->
+                    </div> <!-- Fin de .box -->
+                </div> <!-- Fin de .container -->
+            </div> <!-- Fin de .content -->
+        </div> <!-- Fin de #body -->
+    </div> <!-- Fin de .wrapper -->
+
     <script src="../assets/vendor/jquery/jquery.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/script.js"></script>
