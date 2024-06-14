@@ -32,23 +32,27 @@
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="../admin.php"><i class="fas fa-home"></i> Dashboard</a>
+                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
                 <li>
-                    <a href="jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
 
                 <li>
-                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
 
                 <li>
-                    <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="../Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
 
                 <li>
-                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
+                </li>
+
+                <li>
+                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
 
             </ul>
@@ -82,21 +86,34 @@
                                     <div class="col-md-6">
 
                                         <?php
-                                        // recupérer dans l'url l'id de l'album à supprimer
-                                        $allJardinId = $_GET['num'];
+                                        if (isset($_GET['num'])) {
+                                            $allJardinId = $_GET['num'];
 
-                                        $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
-                                        $mabd->query('SET NAMES utf8;');
+                                            try {
+                                                $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
+                                                $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                        // tapez ici la requete de suppression de l'album dont l'id est passé dans l'url
-                                        $req = 'DELETE FROM Jardin WHERE jardin_id = ' . $allJardinId;
+                                                // Suppression des parcelles associées au jardin
+                                                $req_delete_parcelles = "DELETE FROM Parcelle WHERE jardin_id = :jardin_id";
+                                                $stmt_delete_parcelles = $mabd->prepare($req_delete_parcelles);
+                                                $stmt_delete_parcelles->execute(['jardin_id' => $allJardinId]);
 
-                                        $resultat = $mabd->query($req);
+                                                // Suppression du jardin lui-même
+                                                $req_delete_jardin = "DELETE FROM Jardin WHERE jardin_id = :jardin_id";
+                                                $stmt_delete_jardin = $mabd->prepare($req_delete_jardin);
+                                                $stmt_delete_jardin->execute(['jardin_id' => $allJardinId]);
 
-                                        echo '<p>Suppression du jardin réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
-                                        echo "<br>";
-                                        echo '<a  class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
+                                                echo '<p>Suppression du jardin et de ses parcelles réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
+                                                echo "<br>";
+                                                echo '<a class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
+                                            } catch (PDOException $e) {
+                                                echo "Erreur : " . $e->getMessage();
+                                            }
+                                        } else {
+                                            echo '<p>Aucun ID de jardin fourni.</p>';
+                                        }
                                         ?>
+
                                     </div>
                                 </div>
                             </div>
