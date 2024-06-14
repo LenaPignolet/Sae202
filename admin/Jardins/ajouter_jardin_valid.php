@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Page admin">
-    <title>Tableau de bord</title>
+    <title>Dashboard</title>
     <link href="../assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -26,23 +26,26 @@
     <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <img src="../../images/logo.png" alt="bootraper logo" width="170px" class="app-logo">
+                <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="../admin.php"><i class="fas fa-home"></i> Tableau de bord</a>
+                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
                 <li>
-                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
                 <li>
-                    <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="../Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
                 <li>
-                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
+                </li>
+                <li>
+                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
             </ul>
         </nav>
@@ -74,13 +77,15 @@
                                 <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
                                     <div class="col-md-6">
                                         <?php
-                                        $nom = $_POST['nom'];
-                                        $adresse = $_POST['adresse'];
-                                        $surface = $_POST['surface'];
-                                        $nParcelle = $_POST['nParcelle'];
+                                        // Récupération des données POST
+                                        $nom_jardin = $_POST['jardin_nom'] ?? '';
+                                        $coordonne = $_POST['jardin_coord'] ?? '';
+                                        $surface = $_POST['jardin_surface'] ?? '';
+                                        $nombre_parcelles = intval($_POST['nombre_parcelles'] ?? 0);
 
+                                        // Vérification de la connexion à la base de données
                                         try {
-                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;','usersae202', 'sae202');
+                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
                                             $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                             $mabd->query('SET NAMES utf8;');
                                         } catch (PDOException $e) {
@@ -89,65 +94,77 @@
                                         }
 
                                         // Vérification du format de l'image téléchargée
-                                        $imageType = $_FILES["photo"]["type"];
+                                        $imageType = $_FILES["jardin_photo"]["type"] ?? '';
                                         $allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
                                         if (!in_array($imageType, $allowedTypes)) {
                                             echo '<p>Désolé, le type d\'image n\'est pas reconnu ! Seuls les formats PNG et JPEG sont autorisés.</p>';
                                             echo "<br>";
-                                            echo '<a class="btn btn-success" href="jardin_gestion.php">Retour au tableau de bord</a>';
+                                            echo '<a class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
                                             die();
                                         }
 
-                                        // Création d'un nouveau nom pour cette image téléchargée pour éviter d'avoir 2 fichiers avec le même nom
-                                        $nouvelleImage = date("Y_m_d_H_i_s") . "---" . basename($_FILES["photo"]["name"]);
-                                        $targetDir = "../../images/uploads/"; // Chemin correct vers le dossier
+                                        // Création d'un nouveau nom pour l'image téléchargée
+                                        $nouvelleImage = date("Y_m_d_H_i_s") . "---" . basename($_FILES["jardin_photo"]["name"]);
+                                        $targetDir = "/var/www/sae202/images/uploads/";
 
                                         // Vérification si le dossier existe et est accessible
-                                        if (!is_dir($targetDir)) {
-                                            echo '<p>Le dossier cible n\'existe pas. Veuillez vérifier le chemin.</p>';
+                                        if (!is_dir($targetDir) || !is_writable($targetDir)) {
+                                            echo '<p>Le dossier cible n\'existe pas ou n\'est pas accessible en écriture. Veuillez vérifier le chemin.</p>';
                                             echo "<br>";
-                                            echo '<a class="btn btn-success" href="jardin_gestion.php">Retour au tableau de bord</a>';
+                                            echo '<a class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
                                             die();
                                         }
 
                                         $targetFilePath = $targetDir . $nouvelleImage;
 
                                         // Dépôt du fichier téléchargé dans le dossier
-                                        if (is_uploaded_file($_FILES["photo"]["tmp_name"])) {
-                                            if (!move_uploaded_file($_FILES["photo"]["tmp_name"], $targetFilePath)) {
+                                        if (is_uploaded_file($_FILES["jardin_photo"]["tmp_name"])) {
+                                            if (!move_uploaded_file($_FILES["jardin_photo"]["tmp_name"], $targetFilePath)) {
                                                 echo '<p>Problème avec la sauvegarde de l\'image, désolé...</p>';
                                                 echo "<br>";
-                                                echo '<a class="btn btn-success" href="jardin_gestion.php">Retour au tableau de bord</a>';
+                                                echo '<a class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
                                                 die();
                                             }
                                         } else {
                                             echo '<p>Problème : image non chargée...</p>';
                                             echo "<br>";
-                                            echo '<a class="btn btn-success" href="jardin_gestion.php">Retour au tableau de bord</a>';
+                                            echo '<a class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
                                             die();
                                         }
 
-                                        // Préparation de la requête d'insertion
-                                        $req = $mabd->prepare('INSERT INTO Jardin (jardin_photo, jardin_nom, jardin_coord, jardin_surface, jardin_n_parcelle) VALUES (:photo, :nom, :adresse, :surface, :nParcelle)');
-
-                                        // Exécution de la requête avec les valeurs passées en paramètres
+                                        // Insertion des données dans la base
                                         try {
-                                            $resultat = $req->execute([
-                                                ':photo' => $nouvelleImage,
-                                                ':nom' => $nom,
-                                                ':adresse' => $adresse,
-                                                ':surface' => $surface,
-                                                ':nParcelle' => $nParcelle
-                                            ]);
-                                            echo '<p>Jardin ajouté avec succès ! <i class="fas fa-check-circle" style="color: #037c58;"></i></p>';
+                                            // Insertion du jardin
+                                            $req = 'INSERT INTO Jardin (jardin_nom, jardin_coord, jardin_photo, jardin_surface) VALUES (:nom_jardin, :coordonne, :image_jardin, :surface)';
+                                            $stmt = $mabd->prepare($req);
+                                            $stmt->bindParam(':nom_jardin', $nom_jardin);
+                                            $stmt->bindParam(':coordonne', $coordonne);
+                                            $stmt->bindParam(':image_jardin', $nouvelleImage);
+                                            $stmt->bindParam(':surface', $surface);
+                                            $stmt->execute();
+
+                                            // Récupération de l'ID du jardin inséré
+                                            $jardin_id = $mabd->lastInsertId();
+
+                                            // Insertion des parcelles
+                                            $req_parcelle = 'INSERT INTO Parcelle (parcelle_nom, jardin_id, disponible) VALUES (:parcelle_nom, :jardin_id, 1)';
+                                            $stmt_parcelle = $mabd->prepare($req_parcelle);
+
+                                            for ($i = 1; $i <= $nombre_parcelles; $i++) {
+                                                $parcelle_nom = 'Parcelle ' . $i;
+                                                $stmt_parcelle->bindParam(':parcelle_nom', $parcelle_nom);
+                                                $stmt_parcelle->bindParam(':jardin_id', $jardin_id);
+                                                $stmt_parcelle->execute();
+                                            }
+
+                                            echo '<p>Le jardin et ses parcelles ont été ajoutés avec succès ! <i class="fas fa-check-circle" style="color: #037c58;"></i></p>';
                                             echo "<br>";
                                             echo '<a class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
                                         } catch (PDOException $e) {
-                                            echo '<p>Échec de l\'ajout du jardin : ' . $e->getMessage() . '</p>';
-                                            echo "<br>";
-                                            echo '<a class="btn btn-success" href="gestion_jardin.php">Retour au tableau de bord</a>';
+                                            echo '<p>Erreur : ' . $e->getMessage() . '</p>';
                                         }
                                         ?>
+
                                     </div> <!-- Fin de .col-md-6 -->
                                 </div> <!-- Fin de .tab-pane -->
                             </div> <!-- Fin de .tab-content -->
