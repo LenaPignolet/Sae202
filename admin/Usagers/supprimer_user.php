@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Page admin">
-    <title>Tableau de bord</title>
+    <title>Dashboard</title>
     <link href="../assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -28,27 +28,31 @@
     <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <img src="../../images/logo.png" alt="bootraper logo" width="170px" class="app-logo">
+                <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="../admin.php"><i class="fas fa-home"></i> Tableau de bord</a>
+                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
                 <li>
-                    <a href="../Jardins/jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
 
                 <li>
-                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
 
                 <li>
-                    <a href="user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="./user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
 
                 <li>
-                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
+                </li>
+
+                <li>
+                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
 
             </ul>
@@ -85,7 +89,7 @@
                                         // recupérer dans l'url l'id de l'album à supprimer
                                         $allJardinId = $_GET['num'];
 
-                                        $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;','usersae202', 'sae202');
+                                        $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
                                         $mabd->query('SET NAMES utf8;');
 
                                         // tapez ici la requete de suppression de l'album dont l'id est passé dans l'url
@@ -95,7 +99,7 @@
 
                                         echo '<p>Suppression de l\'utilisateur réussie ! <i class="fas fa-circle-check" style="color: #037c58;"></i></p>';
                                         echo "<br>";
-                                        echo '<a  class="btn btn-success" href="gestion_user.php">Retour au tableau de bord</a>';
+                                        echo '<a  class="btn btn-success" href="user_gestion.php">Retour au tableau de bord</a>';
                                         ?>
 
                                     </div>
