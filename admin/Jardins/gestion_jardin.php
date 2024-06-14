@@ -42,7 +42,11 @@
                 </li>
 
                 <li>
-                    <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="../Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                </li>
+
+                <li>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
                 </li>
 
                 <li>
@@ -87,29 +91,55 @@
                                                 <th>Nom</th>
                                                 <th>Adresse</th>
                                                 <th>Surface (m²)</th>
-                                                <th>N° de parcelle</th>
+                                                <th>Nombre de parcelles</th>
+                                                <th>Nom de parcelle</th>
                                                 <th>Modifier</th>
                                                 <th>Supprimer</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            
                                             <?php
-                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
                                             $mabd->query('SET NAMES utf8;');
-                                            $req = "SELECT * FROM Jardin";
+
+                                            $req = "
+                                            SELECT j.*, COUNT(p.parcelle_id) AS total_parcelles, MIN(p.parcelle_nom) AS premier_parcelle_nom
+                                            FROM Jardin j
+                                            LEFT JOIN Parcelle p ON j.jardin_id = p.jardin_id
+                                            GROUP BY j.jardin_id
+                                        ";
+                                        
+                                        
                                             $resultat = $mabd->query($req);
+
                                             foreach ($resultat as $value) {
                                                 echo '<tr>';
-                                                echo '<td><img class="photo_gestion" style="width:100px;" src="/images/uploads/' . $value['jardin_photo'] . '" alt="Jardin"></td>';
+                                                echo '<td><img class="photo_gestion" style="width:100px;" src="/images/uploads/' . htmlspecialchars($value['jardin_photo']) . '" alt="Jardin"></td>';
                                                 echo '<td>' . htmlspecialchars($value['jardin_nom']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($value['jardin_coord']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($value['jardin_surface']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($value['jardin_n_parcelle']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($value['total_parcelles']) . '</td>';
+                                                
+                                                // Affichage du nom de la première parcelle
+                                                echo '<td>';
+                                                if (!empty($value['premier_parcelle_nom'])) {
+                                                    echo htmlspecialchars($value['premier_parcelle_nom']);
+                                                } else {
+                                                    echo 'Aucune parcelle';
+                                                }
+                                                echo '</td>';
+                                                
                                                 echo '<td><a class="btn btn-outline-info btn-rounded" aria-label="Modifier" href="modifier_jardin_form.php?num=' . $value['jardin_id'] . '"><i class="fas fa-pen"></i></a></td>';
                                                 echo '<td><a class="btn btn-outline-danger btn-rounded" aria-label="Supprimer" href="supprimer_jardin.php?num=' . $value['jardin_id'] . '"><i class="fas fa-trash"></i></a></td>';
                                                 echo '</tr>';
                                             }
+                                            
+                                            
+                                            
                                             ?>
+
+
                                         </tbody>
                                     </table>
                                 </div>
