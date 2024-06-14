@@ -6,7 +6,7 @@ require('menu.php');
     
     <section id="contact">
 
-        <form class="max-w-md mx-auto" >
+        <form action="envoi_mail.php" method="post" class="max-w-md mx-auto" >
             <h1>Contactez-nous</h1>
             <div class="relative z-0 w-full mb-5 group">
                 <input type="text" name="prenom_tact" id="prenom_tact" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -27,6 +27,14 @@ require('menu.php');
                 </div>
             </div>
             <input type="submit" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" value="Envoyer">
+            <div id="retour_mail">
+                <?php
+                    if (isset($_SESSION['information'])) {
+                    echo '<p>'.$_SESSION['information'].'</p>'."\n";
+                    session_unset();
+                    }
+                ?>
+            </div>
         </form>
 
 </section>

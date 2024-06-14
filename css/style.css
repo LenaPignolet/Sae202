@@ -35,7 +35,7 @@ a {
 /* HOME */
 
 #home {
-    height: 70vh;
+    height: 90vh;
     background: url('../images/background.jpg') center no-repeat fixed;
     background-size: 100vw 120vh;
     color: black;
@@ -44,11 +44,12 @@ a {
     justify-content: center;
     align-items: center;
     color: white;
+    position: relative;
 }
 
-#home h1 {
-    font-size: 4.5em;
-    font-family: "Archivo Black", sans-serif;
+#home img {
+    height: 25%;
+    margin: 2% 0;
 }
 
 #home p {
@@ -58,27 +59,87 @@ a {
 
 #home a {
     transition: all .5s ease;
-    color: #fff;
+    color: #166534;
     border: 3px solid white;
     font-family:'Montserrat', sans-serif;
     text-transform: uppercase;
     text-align: center;
     line-height: 1;
     font-size: 17px;
-    background-color : transparent;
+    background-color : #fff;
     padding: 10px;
     margin: 2%;
     outline: none;
     border-radius: 4px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.05em;
+    margin-bottom: 8%;
 }
 
-#home a:hover {
-    color: #166534;
-    background-color: #fff;
+#recherche {
+    margin: 0 auto;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 100%);
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    width: 700px;
+    padding: 2%;
+    border-radius: 5px;
+    position: absolute;
+    top: 85vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
 }
 
+#recherche h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 1.3em;
+    margin-bottom: 5%;
+}
+
+#recherche_button {
+    background: #03543f;
+    margin-top: 2%;
+    padding: 1% 2%;
+    width: 30%;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#recherche_button:hover {
+    background: #023526;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 8px 10px;
+    background-color: white;
+    width: 80%;
+}
+
+.input-container img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.input-container input {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.input-container input:focus {
+    outline: none; /* Ensure no outline */
+    box-shadow: none; /* Remove box shadow */
+}
 
 /* LISTE JARDINS */
 
@@ -112,7 +173,7 @@ a {
 /* CONTACT */
 
 #contact {
-    height: 82.7vh;
+    height: 90vh;
     background: url('../images/img2.jpg') center no-repeat fixed;
     background-size: cover;
     display: flex;
@@ -133,7 +194,7 @@ a {
 #contact form h1 {
     text-align: center;
     font-weight: 400;
-    font-family: "Jomhuria", serif;
+    font-family: "Roboto", sans-serif;
     font-size: 3em;
     letter-spacing: 0.02em;
 }
@@ -164,7 +225,7 @@ a {
 
 .login-container h2 {
     font-weight: 400;
-    font-family: "Jomhuria", serif;
+    font-family: "Roboto", sans-serif;
     font-size: 3em;
     text-align: center;
 }
@@ -177,6 +238,47 @@ a {
     width: 100%;
     border-radius: 5px;
 }
+
+/* PROFIL */
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(214, 214, 214);
+    height: 90vh;
+}
+
+#profil_layout {
+    display: flex;
+    justify-content: space-between;
+}
+
+#pp_layout {
+    padding: 2%;
+    height: 20em;
+    width: 18em;
+    background: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#pp_layout a {
+    font-size: 0.8em;
+}
+
+#pp_layout h3 {
+    margin-top: 5%;
+}
+
+#pp_form img {
+    width: 20em;
+    clip-path: circle();
+    margin-bottom: 10%;
+}
+
+
 
 /* ADMIN */
 
@@ -240,10 +342,62 @@ a {
     background: #023526;
 }
 
+/* MENTIONS */
+
+#mentions {
+    max-width: 1090px;
+    margin: 0 auto;
+    margin-bottom: 2%;
+}
+
+#mentions img {
+    margin: 2% auto;
+    height: 7em;
+}
+
+#mentions h2 {
+    text-align: center;
+    margin: 2% 0;
+    font-size: 3em;
+    font-weight: 400;
+    font-family: "Roboto", sans-serif;
+}
+
+#mentions p {
+    font-family: "Manrope", sans-serif;
+}
+
+#mentions .gras {
+    font-weight: 600;
+}
 
 /* FOOTER */
 
-footer {
+#links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    height: 15vh;
+    background: #80a99e;
+    padding: 0 15%;
+    color: white;
+}
+
+.group h4 {
+    font-weight: 800;
+}
+
+.group a {
+    display: block;
+    font-size: 0.9em;
+}
+
+.group a:hover {
+    text-decoration: underline;
+}
+
+#footer {
     height: 8vh;
     background: #03543f;
     display: flex;
@@ -253,11 +407,11 @@ footer {
     color: white;
 }
 
-footer a {
+#footer a {
     margin-left: 0.5%;
     margin-right: 0.5%;
 }
 
-footer a:hover {
+#footer a:hover {
     text-decoration: underline;
 }
