@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Page admin">
-    <title>Tableau de bord</title>
+    <title>Dashboard</title>
     <link href="../assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -26,23 +26,26 @@
     <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <img src="../../images/logo.png" alt="bootraper logo" width="170px" class="app-logo">
+                <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="../admin.php"><i class="fas fa-home"></i> Tableau de bord</a>
+                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="../Jardins/jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="../Jardins/gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
                 <li>
-                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
                 <li>
-                    <a href="user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="./user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
                 <li>
-                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
+                </li>
+                <li>
+                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
             </ul>
         </nav>
@@ -80,7 +83,7 @@
                                         $mdp = $_POST['mdp'];
 
                                         try {
-                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;','usersae202', 'sae202');
+                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
                                             $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                             $mabd->query('SET NAMES utf8;');
                                         } catch (PDOException $e) {
@@ -88,7 +91,7 @@
                                             die();
                                         }
 
-                                        // Vérification du format de l'image téléchargée
+                                       
                                         $imageType = $_FILES["photo"]["type"];
                                         $allowedTypes = ["image/png", "image/jpg", "image/jpeg"];
                                         if (!in_array($imageType, $allowedTypes)) {
@@ -98,11 +101,11 @@
                                             die();
                                         }
 
-                                        // Création d'un nouveau nom pour cette image téléchargée pour éviter d'avoir 2 fichiers avec le même nom
+                                       
                                         $nouvelleImage = date("Y_m_d_H_i_s") . "---" . basename($_FILES["photo"]["name"]);
-                                        $targetDir = "/var/www/sae202/images/pp/"; // Chemin correct vers le dossier
+                                        $targetDir = "/var/www/sae202/images/pp/"; 
 
-                                        // Vérification si le dossier existe et est accessible
+                                        
                                         if (!is_dir($targetDir)) {
                                             echo '<p>Le dossier cible n\'existe pas. Veuillez vérifier le chemin.</p>';
                                             echo "<br>";
@@ -112,7 +115,6 @@
 
                                         $targetFilePath = $targetDir . $nouvelleImage;
 
-                                        // Dépôt du fichier téléchargé dans le dossier
                                         if (is_uploaded_file($_FILES["photo"]["tmp_name"])) {
                                             if (!move_uploaded_file($_FILES["photo"]["tmp_name"], $targetFilePath)) {
                                                 echo '<p>Problème avec la sauvegarde de l\'image, désolé...</p>';
@@ -127,10 +129,9 @@
                                             die();
                                         }
 
-                                        // Préparation de la requête d'insertion
+
                                         $req = $mabd->prepare('INSERT INTO User (user_pp, user_nom, user_prenom, user_mail, user_passwd) VALUES (:photo, :nom, :prenom, :mail, :mdp)');
 
-                                        // Exécution de la requête avec les valeurs passées en paramètres
                                         try {
                                             $resultat = $req->execute([
                                                 ':photo' => $nouvelleImage,
