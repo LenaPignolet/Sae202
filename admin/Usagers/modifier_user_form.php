@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Page admin">
-    <title>Tableau de bord</title>
+    <title>Dashboard</title>
     <link href="../assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -26,27 +26,31 @@
     <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <img src="../../images/logo.png" alt="bootraper logo" width="170px" class="app-logo">
+                <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="../admin.php"><i class="fas fa-home"></i> Tableau de bord</a>
+                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
                 <li>
-                    <a href="../Jardins/jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="../Jardins/gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
 
                 <li>
-                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
 
                 <li>
-                    <a href="user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="./user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
 
                 <li>
-                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
+                </li>
+
+                <li>
+                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
 
             </ul>
@@ -80,12 +84,12 @@
                                 <div class="tab-pane fade active show" id="general" role="tabpanel" aria-labelledby="general-tab">
                                     <div class="col-md-6">
 
-                                    <?php
+                                        <?php
                                         if (isset($_GET['num'])) {
                                             $allJardinId = $_GET['num'];
 
                                             try {
-                                                $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;','usersae202', 'sae202');
+                                                $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
                                                 $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                 $req = "SELECT * FROM User WHERE user_id = :allJardinId";
                                                 $stmt = $mabd->prepare($req);
@@ -123,7 +127,6 @@
                                                     echo '<div class="mb-3"> <label for="site-title" class="form-label">Mot de passe</label>
                                                         <input class="form-control" type="text" name="mdp" value="' . htmlspecialchars($allJardin['user_passwd']) . '">
                                                         </div><br>';
-                                                    
                                                 } else {
                                                     echo '<p>L\'utilisateur avec l\'ID ' . htmlspecialchars($allJardinId) . ' n\'existe pas.</p>';
                                                 }
@@ -134,26 +137,11 @@
                                             echo '<p>Aucun ID de l\'utilisateur fourni.</p>';
                                         }
                                         ?>
-                                                <div class="mb-3"> <label for="site-title" class="form-label">Jardin</label>
-                                                <select name="jardin">
-                                                    <?php
-                                                    // Requête pour récupérer la liste des jardins
-                                                    $req = "SELECT * FROM Jardin";
-                                                    $resultat = $mabd->query($req);
 
-                                                    foreach ($resultat as $value) {
-                                                        $selection = ($value['jardin_id'] == $user['jardin_id']) ? "selected" : "";
-                                                        echo '<option ' . $selection . ' value="' . htmlspecialchars($value['jardin_id']) . '"> ' . htmlspecialchars($value['jardin_nom']) . '</option>';
-                                                    }
-                                                    ?>
-                                                </select>
-                                                </div>
-                                                <br>
-                                                
-                                                <div class="mb-3 text-end">
-                                                        <input class="btn btn-success" type="submit" value="Modifier">
-                                                </div>
-                                                </form>
+                                        <div class="mb-3 text-end">
+                                            <input class="btn btn-success" type="submit" value="Modifier">
+                                        </div>
+                                        </form>
 </body>
 
 </html>
