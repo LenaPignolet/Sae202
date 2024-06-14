@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Page admin">
-    <title>Dashboard</title>
+    <title>Tableau de bord</title>
     <link href="../assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -26,23 +26,23 @@
     <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
+                <img src="../../images/logo.png" alt="bootraper logo" width="170px" class="app-logo">
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
+                    <a href="../admin.php"><i class="fas fa-home"></i> Tableau de bord</a>
                 </li>
                 <li>
-                    <a href="../Jardins/gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="../Jardins/jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
                 <li>
-                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
                 <li>
-                    <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
                 <li>
-                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
             </ul>
         </nav>
@@ -80,7 +80,7 @@
                                         $mdp = $_POST['mdp'];
 
                                         try {
-                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;','usersae202', 'sae202');
                                             $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                             $mabd->query('SET NAMES utf8;');
                                         } catch (PDOException $e) {
