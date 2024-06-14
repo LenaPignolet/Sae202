@@ -26,7 +26,7 @@
     <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <img src="assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
+                <img src="./assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
@@ -43,6 +43,10 @@
 
                 <li>
                     <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                </li>
+
+                <li>
+                    <a href="./Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
                 </li>
 
                 <li>
@@ -96,7 +100,7 @@
                                                 $servername = "localhost";
                                                 $username = "Usersae202";
                                                 $password = "123";
-                                                $database = "sae202Base";
+                                                $database = "sae202";
 
                                                 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -145,7 +149,7 @@
                                                 $servername = "localhost";
                                                 $username = "Usersae202";
                                                 $password = "123";
-                                                $database = "sae202Base";
+                                                $database = "sae202";
 
                                                 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -182,6 +186,55 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="icon-big text-center">
+                                            <i class="fas fa-spa" style="color: #f0c219;"></i>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div class="detail">
+                                                <p class="detail-subtitle">Nombre total des plantations</p>
+
+                                                <?php
+                                                
+                                                $servername = "localhost";
+                                                $username = "Usersae202";
+                                                $password = "123";
+                                                $database = "sae202";
+
+                                                $conn = new mysqli($servername, $username, $password, $database);
+
+                                                
+                                                if ($conn->connect_error) {
+                                                    die("Échec de la connexion : " . $conn->connect_error);
+                                                }
+
+                                                
+                                                $sql = "SELECT COUNT(*) AS total_plant FROM type_plantation";
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                   
+                                                    $row = $result->fetch_assoc();
+                                                    $total_plant = $row["total_plant"];
+                                                    echo "<span class='number'>" . $total_plant . "</span>";
+                                                } else {
+                                                    echo "Aucun jardin trouvé.";
+                                                }
+
+                                                
+                                                $conn->close();
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-3 mt-3">
+                            <div class="card">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="icon-big text-center">
                                                 <i class="fas fa-users" style="color: #74C0FC;"></i>
                                             </div>
                                         </div>
@@ -193,7 +246,7 @@
                                                 $servername = "localhost";
                                                 $username = "Usersae202";
                                                 $password = "123";
-                                                $database = "sae202Base";
+                                                $database = "sae202";
 
                                                 $conn = new mysqli($servername, $username, $password, $database);
 
