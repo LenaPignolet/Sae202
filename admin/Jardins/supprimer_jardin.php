@@ -32,15 +32,15 @@
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
+                    <a href="../admin.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
                 <li>
-                    <a href="gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
 
                 <li>
-                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
 
                 <li>
@@ -48,7 +48,7 @@
                 </li>
 
                 <li>
-                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
 
             </ul>
