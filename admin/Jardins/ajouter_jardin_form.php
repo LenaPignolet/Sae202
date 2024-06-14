@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Page admin">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tableau de bord</title>
+    <title>Dashboard</title>
     <link href="../assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -25,23 +25,26 @@
     <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <img src="../../images/logo.png" alt="bootraper logo" width="170px" class="app-logo">
+                <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="../admin.php"><i class="fas fa-home"></i> Tableau de bord</a>
+                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
                 <li>
-                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
                 <li>
                     <a href="../Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
                 <li>
-                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
+                </li>
+                <li>
+                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
             </ul>
         </nav>
@@ -78,27 +81,26 @@
                                         <form action="ajouter_jardin_valid.php" method="POST" enctype="multipart/form-data">
                                             <div class="mb-3">
                                                 <label class="form-label">Choisir une photo</label>
-                                                <input id="formFile1" class="form-control" type="file" name="photo">
+                                                <input id="formFile1" class="form-control" type="file" name="jardin_photo" required>
                                             </div>
                                             <br>
                                             <div class="mb-3">
-                                                <label class="form-label">Le nom du jardin</label>
-                                                <input class="form-control" type="text" name="nom">
+                                                <label class="form-label">Nom du jardin</label>
+                                                <input class="form-control" type="text" name="jardin_nom" required>
                                             </div>
                                             <br>
                                             <div class="mb-3">
                                                 <label class="form-label">Adresse</label>
-                                                <input class="form-control" type="text" name="adresse">
+                                                <input class="form-control" type="text" name="jardin_coord" required> 
                                             </div>
                                             <br>
                                             <div class="mb-3">
                                                 <label class="form-label">Surface (m²)</label>
-                                                <input class="form-control" type="text" name="surface">
+                                                <input class="form-control" type="text" name="jardin_surface" required>
                                             </div>
-                                            <br>
                                             <div class="mb-3">
-                                                <label class="form-label">Nombre de parcelle</label>
-                                                <input class="form-control" type="text" name="nParcelle">
+                                                <label class="form-label">Nombre de parcelles</label>
+                                                <input class="form-control" type="number" name="nombre_parcelles" min="1" required>
                                             </div>
                                             <br>
                                             <div class="mb-3 text-end">
