@@ -32,23 +32,27 @@
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="../admin.php"><i class="fas fa-home"></i> Dashboard</a>
+                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
                 <li>
-                    <a href="jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
 
                 <li>
-                    <a href="../Parcelle/parcelle_gestion.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
+                    <a href="../Parcelle/gestion_parcelle.php"><i class="fas fa-chess-board"></i> Gestion Parcelles</a>
                 </li>
 
                 <li>
-                    <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="../Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
 
                 <li>
-                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
+                </li>
+
+                <li>
+                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
 
             </ul>
@@ -87,11 +91,10 @@
                                             $nom = $_POST['nom'];
                                             $coord = $_POST['adresse'];
                                             $surface = $_POST['surface'];
-                                            $nParcelle = $_POST['jardin_n_parcelle'];
 
                                             // Connexion à la base de données
                                             try {
-                                                $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+                                                $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
                                                 $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                             } catch (PDOException $e) {
                                                 echo 'Connexion échouée : ' . $e->getMessage();
@@ -104,30 +107,25 @@
                                                 $fileSize = $_FILES['nouvelle_photo']['size'];
                                                 $fileType = $_FILES['nouvelle_photo']['type'];
 
-
                                                 $allowedMimeTypes = ['image/png', 'image/jpeg', 'image/jpg'];
                                                 if (!in_array($fileType, $allowedMimeTypes)) {
                                                     echo "Seuls les formats PNG et JPEG sont autorisés.";
                                                     die();
                                                 }
 
-
                                                 $nouvelle_photo = date("Y_m_d_H_i_s") . "---" . basename($fileName);
                                                 $target_dir = "/var/www/sae202/images/uploads/";
                                                 $target_file = $target_dir . $nouvelle_photo;
 
-
                                                 if (move_uploaded_file($fileTmpPath, $target_file)) {
-
                                                     try {
-                                                        $req = "UPDATE Jardin SET jardin_photo = :nouvelle_photo, jardin_nom = :nom, jardin_coord = :adresse, jardin_surface = :surface, jardin_n_parcelle = :nParcelle WHERE jardin_id = :allJardin";
+                                                        $req = "UPDATE Jardin SET jardin_photo = :nouvelle_photo, jardin_nom = :nom, jardin_coord = :adresse, jardin_surface = :surface WHERE jardin_id = :allJardin";
                                                         $stmt = $mabd->prepare($req);
                                                         $stmt->execute([
                                                             'nouvelle_photo' => $nouvelle_photo,
                                                             'nom' => $nom,
                                                             'adresse' => $coord,
                                                             'surface' => $surface,
-                                                            'nParcelle' => $nParcelle,
                                                             'allJardin' => $allJardin
                                                         ]);
 
@@ -141,7 +139,6 @@
                                                     echo "Une erreur s'est produite lors du téléchargement du fichier.";
                                                 }
                                             } else {
-
                                                 if (isset($_POST['nouvelle_photo_old'])) {
                                                     $nouvelle_photo = $_POST['nouvelle_photo_old'];
                                                 } else {
@@ -149,15 +146,13 @@
                                                     die();
                                                 }
 
-
                                                 try {
-                                                    $req = "UPDATE Jardin SET jardin_nom = :nom, jardin_coord = :adresse, jardin_surface = :surface, jardin_n_parcelle = :nParcelle WHERE jardin_id = :allJardin";
+                                                    $req = "UPDATE Jardin SET jardin_nom = :nom, jardin_coord = :adresse, jardin_surface = :surface WHERE jardin_id = :allJardin";
                                                     $stmt = $mabd->prepare($req);
                                                     $stmt->execute([
                                                         'nom' => $nom,
                                                         'adresse' => $coord,
                                                         'surface' => $surface,
-                                                        'nParcelle' => $nParcelle,
                                                         'allJardin' => $allJardin
                                                     ]);
 
@@ -172,6 +167,7 @@
                                             echo "<p>Méthode non autorisée.</p>";
                                         }
                                         ?>
+
                                     </div>
                                 </div>
                             </div>
