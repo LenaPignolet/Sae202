@@ -1,149 +1,91 @@
 <?php
-if (count($_POST)==0) {
-	
+session_start();
+require("../connexion_sql.php");
+
+// Vérification de l'appel via le formulaire
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+    header('Location: ../contact.php');
+    exit();
 }
 
-$nom=$_POST['nom'];
-$prenom=$_POST['prenom'];
-$message=$_POST['message'];
-$email=$_POST['email'];
-$email_content = 'Bonjour, '.$nom.' '.$prenom.',votre demande pour '.$_POST['fav_language'].' a été prise en compte';
+// Vérification des données du formulaire
+$erreurs = 0;
+$affichage_retour = '';
 
-
-
-
-$prenom=mb_strtolower($prenom);
-$nom=mb_strtolower($nom);
-
-
-echo 'Votre nom : '.$prenom.' '.$nom.'<br>';
-echo 'Adresse mail : '.$email.'<br>';
-echo 'Message : '.$message.'<br>'; 
-
-
-$subject='SAE105 : demande pour '.$_POST['fav_language'].' par '.$prenom.' '.$nom;
-$headers['From']=$email;							
-$headers['Reply-to']=$email;						
-$headers['X-Mailer']='PHP/'.phpversion();
-$headers['MIME-Version'] = '1.0';
-$headers['Content-type'] = 'text/html; charset=utf-8';		
-$email_dest="mmi23h07@mmi-troyes.fr";
-
-
-if (!empty($_POST['nom'])) {
-	$nom=ucfirst($_POST['nom']);
-} else {
-  header('location: ../contact.php');
-}
-
-//le mail
-if (!empty($_POST['email'])) {
-    // Si le champ email contient des données
-        // Verification du format de l'email
-        if (filter_var($email,FILTER_VALIDATE_EMAIL)) {
-        $email=$_POST['email'];
-      } else {
-      // Si l'email est incorrect on retourne au formulaire  
-         header('location: ../contact.php');
-      }
-  // Si le champ email est vide, on retourne au formulaire     
-  } else {
-   header('location: ../contact.php');
-  }
-  if (!empty($_POST['prenom'])) {
-	$nom=ucfirst($_POST['prenom']);
-} else {
-  header('location: ../contact.php');
-}
-  //message
-  if (!empty($_POST['message'])) {
-	$nom=ucfirst($_POST['message']);
-} else {
-  header('location: ../contact.php');
-}
-  // Vérification des données du formulaire
-
-$affichage_retour = '';														// Lignes à ajouter au début des vérifications
-$erreurs=0;
-
-// Exemple pour le nom
-if (!empty($_POST['nom'])) {
-	$nom=$_POST['nom'];
-} else {
-    // header('location: contact.php'); 									// Ligne à remplacer
-    $affichage_retour .='Le champ NOM est obligatoire<br>';
+// Vérification de l'adresse mail
+if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    $affichage_retour .= 'Adresse mail incorrecte<br>';
     $erreurs++;
+} else {
+    $email = htmlspecialchars($_POST['email']);
 }
 
+// Vérification du sujet
+if (empty($_POST['subject'])) {
+    $affichage_retour .= 'Le champ SUBJECT est obligatoire<br>';
+    $erreurs++;
+} else {
+    $subject = htmlspecialchars($_POST['subject']);
+}
 
-// Exemple pour l'adresse mail
-if (!empty($_POST['email'])) {
-  
-  	// Verification du format de l'email
-  	if (filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
-      $email=$_POST['email'];
+// Vérification du message
+if (empty($_POST['message'])) {
+    $affichage_retour .= 'Le champ MESSAGE est obligatoire<br>';
+    $erreurs++;
+} else {
+    $message = htmlspecialchars($_POST['message']);
+}
+
+// Affichage des erreurs et arrêt du script si des erreurs sont détectées
+if ($erreurs > 0) {
+    echo $affichage_retour;
+    exit();
+}
+
+// Préparation des variables pour l'envoi du mail de contact
+$headers = "From: $email\r\n";
+$headers .= "Reply-to: $email\r\n";
+$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-type: text/html; charset=utf-8\r\n";
+
+// Adresse du destinataire
+$email_dest = "mmi23h07@mmi-troyes.fr";
+
+// Envoi du mail de contact
+if (mail($email_dest, $subject, $message, $headers)) {
+    // Préparation et envoi du mail de confirmation à l'utilisateur
+    $subject_confirmation = 'Mail de confirmation';
+    $message_confirmation = '
+    <html>
+    <head>
+        <title>Confirmation d\'envoi</title>
+    </head>
+    <body>
+        <p>Merci de nous avoir contactés !</p>
+        <p>Votre message a bien été reçu.</p>
+        <p>Nous vous répondrons dans les plus brefs délais.</p>
+        <p>Cordialement,</p>
+        <p>EcoPulse</p>
+    </body>
+    </html>';
+
+    // Headers pour le mail de confirmation
+    $headers_confirmation = "From: no-reply@yourdomain.com\r\n";
+    $headers_confirmation .= "Reply-to: no-reply@yourdomain.com\r\n";
+    $headers_confirmation .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+    $headers_confirmation .= "MIME-Version: 1.0\r\n";
+    $headers_confirmation .= "Content-type: text/html; charset=utf-8\r\n";
+
+    if (mail($email, $subject_confirmation, $message_confirmation, $headers_confirmation)) {
+        // Envoi réussi du mail de confirmation à l'utilisateur
+        header('Location: ../contact.php?message=success');
     } else {
-    // Si l'email est incorrect 
-    // header('location: contact.php'); 									// Ligne à remplacer
-    $affichage_retour .='Adresse mail incorrecte<br>';
-    $erreurs++;
+        // Envoi échoué du mail de confirmation à l'utilisateur
+        header('Location: ../contact.php?message=error');
     }
-        
-// Si le champ email est vide
 } else {
-    // header('location: contact.php'); 									// Ligne à remplacer
-    $affichage_retour .='Le champ EMAIL est obligatoire<br>';
-    $erreurs++;
-}
-if ($erreurs == 0)
-    //Envoi du mail de contact)
-    if (mail($email_dest,$subject,$message,$headers)) {
-    $erreurs=0;
-    } else {
-    $erreurs++;
-    echo 'dest mail';
-    }
-    
-    // Préparation des données pour la confirmation
-    
-    //Envoi du mail de confirmation
-    if (mail($email,$subject,$email_content,$headers)) {
-    $erreurs=0;
-    } else {
-    $erreurs++;
-    }
-    
-    // Détermination du message à affichée après les tentatives d'envoi
-        $affichage_retour='Votre demande à bien été envoyée';
-      
-        if ($erreurs != 0) {
-      $affichage_retour='Echec de l\'envoi du message';
-      }
-    
-  ?>
-
-
-<main>
-
-<?php
-if ($erreurs == 0) {                                       
-echo '<div id="reussite">'."\n";
-echo '<p>'.$affichage_retour.'</p>'."\n";
-echo '<form action="../index.php">'."\n";
-echo '<button type="submit">Retour</button>'."\n";        
-echo '</form>'."\n";
-echo '</div>'."\n";
-
-} else {                                                 
-
-echo '<div id="echec">'."\n";
-echo '<p>'.$affichage_retour.'</p>'."\n";
-echo '<form action="../contact.php">'."\n";
-echo '<button type="submit">Retour</button>'."\n";       
-echo '</form>'."\n";
-echo '</div>'."\n";
+    // Envoi échoué du mail de contact
+    header('Location: ../contact.php?message=error');
 }
 ?>
-
-</main>
-
