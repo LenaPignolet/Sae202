@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Page admin">
-    <title>Tableau de bord</title>
+    <title>Dashboard</title>
     <link href="../assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
     <link href="../assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
@@ -26,15 +26,15 @@
     <div class="wrapper">
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
-                <img src="../../images/logo.png" alt="bootraper logo" width="170px" class="app-logo">
+                <img src="../assets/img/logo.png" alt="bootraper logo" width="40px" class="app-logo">
             </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="../admin.php"><i class="fas fa-home"></i> Dashboard</a>
+                    <a href="/admin/gestion.php"><i class="fas fa-home"></i> Dashboard</a>
                 </li>
 
                 <li>
-                    <a href="jardin_gestion.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
+                    <a href="gestion_jardin.php"><i class="fas fa-tree"></i> Gestion Jardins</a>
                 </li>
 
                 <li>
@@ -42,11 +42,15 @@
                 </li>
 
                 <li>
-                    <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="../Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
                 </li>
 
                 <li>
-                    <a href="../../index.php"><i class="fas fa-arrow-left"></i> Retour</a>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
+                </li>
+
+                <li>
+                    <a href="/index.php"><i class="fas fa-arrow-left"></i> Retour</a>
                 </li>
 
             </ul>
@@ -85,7 +89,7 @@
                                             $allJardinId = $_GET['num'];
 
                                             try {
-                                                $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+                                                $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
                                                 $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                                                 $req = "SELECT * FROM Jardin WHERE jardin_id = :allJardinId";
                                                 $stmt = $mabd->prepare($req);
@@ -97,11 +101,11 @@
                                                     $resultat_parcelle = $mabd->query($req_parcelle);
 
                                                     echo '<form method="POST" action="modifier_jardin_valid.php" enctype="multipart/form-data">';
-                                                    // Champ caché pour stocker l'ancien nom de fichier photo
+                                                    
                                                     echo '<input type="hidden" name="nouvelle_photo_old" value="' . htmlspecialchars($allJardin['jardin_photo']) . '">';
-                                                    // Champ hidden pour l'ID du jardin
+                                                    
                                                     echo '<input type="hidden" name="num" value="' . htmlspecialchars($allJardin['jardin_id']) . '">';
-                                                    // Champ pour la nouvelle photo
+
                                                     echo '<div class="mb-3">
                                                     <label class="form-label">Nouvelle Photo</label>
                                                     <input id="formFile1" class="form-control" type="file" name="nouvelle_photo">
@@ -118,10 +122,6 @@
 
                                                     echo '<div class="mb-3"> <label for="site-title" class="form-label">Surface (m²)</label>
                                                         <input class="form-control" type="text" name="surface" value="' . htmlspecialchars($allJardin['jardin_surface']) . '">
-                                                        </div><br>';
-
-                                                    echo '<div class="mb-3"> <label for="site-title" class="form-label">Nombre de parcelles</label>
-                                                        <input class="form-control" type="text" name="jardin_n_parcelle" value="' . htmlspecialchars($allJardin['jardin_n_parcelle']) . '">
                                                         </div><br>';
 
                                                     echo '<div class="mb-3 text-end">
