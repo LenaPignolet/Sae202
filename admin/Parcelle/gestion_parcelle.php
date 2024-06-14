@@ -42,7 +42,11 @@
                 </li>
 
                 <li>
-                    <a href="./Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                    <a href="../Usagers/user_gestion.php"><i class="fas fa-user-friends"></i> Gestion Users</a>
+                </li>
+
+                <li>
+                    <a href="../Plantation/gestion_plantation.php"><i class="fas fa-spa"></i> Gestion Plantation</a>
                 </li>
 
                 <li>
@@ -77,7 +81,6 @@
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
                             <div class="card">
-                                <div class="card-header"><a href="ajouter_parcelle_form.php" style="color: #03543F; background-color: #fffff1; padding: 6px; border-radius: 3px;">Ajouter une parcelle <i class="fas fa-plus" style="color: #03543F;"></i></a></div>
                                 <div class="card-body">
                                     <p class="card-title"></p>
                                     <table class="table table-hover" id="dataTables-example" width="100%">
@@ -91,7 +94,7 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202Base;charset=UTF8;', 'Usersae202', '123');
+                                            $mabd = new PDO('mysql:host=localhost;dbname=sae202;charset=UTF8;', 'Usersae202', '123');
                                             $mabd->query('SET NAMES utf8;');
                                             $req = "SELECT * FROM Parcelle";
                                             $resultat = $mabd->query($req);
