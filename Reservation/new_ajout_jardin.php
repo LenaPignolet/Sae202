@@ -1,3 +1,9 @@
+<?php
+session_start(); // Démarrer la session pour accéder aux variables de session
+
+require('../header.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +16,16 @@
 <h2>Vous venez d'ajouter un jardin</h2>
 <hr>
 <?php
+// Vérifiez que l'utilisateur est connecté
+if (!isset($_SESSION['id'])) {
+    die('Erreur : Vous devez être connecté pour ajouter un jardin.');
+}
+
 $nom_jardin = $_POST['jardin_nom'];
 $coordonne = $_POST['jardin_coord'];
 $surface = $_POST['jardin_surface'];
 $nombre_parcelles = intval($_POST['nombre_parcelles']);
+$user_id = $_SESSION['id']; 
 
 $imageType = $_FILES["jardin_photo"]["type"];
 if ( ($imageType != "image/png") &&
@@ -40,12 +52,13 @@ try {
     $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $mabd->query('SET NAMES utf8;');
 
-    $req = 'INSERT INTO Jardin (jardin_nom, jardin_coord, jardin_photo, jardin_surface) VALUES (:nom_jardin, :coordonne, :image_jardin, :surface)';
+    $req = 'INSERT INTO Jardin (jardin_nom, jardin_coord, jardin_photo, jardin_surface, user_id) VALUES (:nom_jardin, :coordonne, :image_jardin, :surface, :user_id)';
     $stmt = $mabd->prepare($req);
     $stmt->bindParam(':nom_jardin', $nom_jardin);
     $stmt->bindParam(':coordonne', $coordonne);
     $stmt->bindParam(':image_jardin', $nouvelleImage);
     $stmt->bindParam(':surface', $surface);
+    $stmt->bindParam(':user_id', $user_id); 
     $stmt->execute();
 
     $jardin_id = $mabd->lastInsertId();
