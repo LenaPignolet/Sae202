@@ -1,5 +1,6 @@
 <?php
 include '../connexion_sql.php';
+session_start();
 
 // Vérifiez que les données POST sont définies
 if (!isset($_POST['user_id']) || !isset($_POST['parcelle_id']) || !isset($_POST['jardin_id'])) {
@@ -24,7 +25,7 @@ if ($row) {
         $stmt = $mabd->prepare($sql);
         
         if ($stmt->execute(['user_id' => $user_id, 'parcelle_id' => $parcelle_id])) {
-            header('location: parcelle_reservation.php');
+            header('location: /profil/profil.php');
 
         } else {
             echo "Erreur lors de la réservation.";

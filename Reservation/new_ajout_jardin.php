@@ -4,7 +4,7 @@
     <title>Ajout de jardin</title>
 </head>
 <body>
-<a href="index.php">Retour au tableau de bord</a>    
+<a href="../index.php">Retour au tableau de bord</a>    
 <hr>
 <h1>Gestion de nos jardins</h1>
 <h2>Vous venez d'ajouter un jardin</h2>
@@ -15,7 +15,6 @@ $coordonne = $_POST['jardin_coord'];
 $surface = $_POST['jardin_surface'];
 $nombre_parcelles = intval($_POST['nombre_parcelles']);
 
-// Vérification du format de l'image téléchargée
 $imageType = $_FILES["jardin_photo"]["type"];
 if ( ($imageType != "image/png") &&
      ($imageType != "image/jpg") &&
@@ -24,12 +23,10 @@ if ( ($imageType != "image/png") &&
     die();
 }
 
-// Création d'un nouveau nom pour cette image téléchargée pour éviter d'avoir 2 fichiers avec le même nom
 $nouvelleImage = date("Y_m_d_H_i_s")."---".$_FILES["jardin_photo"]["name"];
 
-// Dépôt du fichier téléchargé dans le dossier /var/www/r214/images/uploads
 if(is_uploaded_file($_FILES["jardin_photo"]["tmp_name"])) {
-    if(!move_uploaded_file($_FILES["jardin_photo"]["tmp_name"], "../images/pp/".$nouvelleImage)) {
+    if(!move_uploaded_file($_FILES["jardin_photo"]["tmp_name"], "../images/uploads/".$nouvelleImage)) {
         echo '<p>Problème avec la sauvegarde de l\'image, désolé...</p>';
         die();
     }
@@ -43,7 +40,6 @@ try {
     $mabd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $mabd->query('SET NAMES utf8;');
 
-    // Insertion du jardin
     $req = 'INSERT INTO Jardin (jardin_nom, jardin_coord, jardin_photo, jardin_surface) VALUES (:nom_jardin, :coordonne, :image_jardin, :surface)';
     $stmt = $mabd->prepare($req);
     $stmt->bindParam(':nom_jardin', $nom_jardin);
@@ -52,7 +48,6 @@ try {
     $stmt->bindParam(':surface', $surface);
     $stmt->execute();
 
-    // Récupération de l'ID du jardin inséré
     $jardin_id = $mabd->lastInsertId();
 
     // Insertion des parcelles

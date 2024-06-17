@@ -15,8 +15,8 @@ require('header.php');
     <h1>Recherchez votre voiture de rêve !</h1>
     <form action="reponse_recherche.php" method="get">
         <p>
-            <label for="modele">Modèle de la voiture :</label>
-            <input type="text" name="marque" id="marque" />
+            <label for="modele">Jardin :</label>
+            <input type="text" name="jardin" id="jardin" />
         </p>
        
         <button type="button" onclick="window.location.href='index.php'">Retour</button>
