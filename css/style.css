@@ -60,20 +60,22 @@ a {
 #home a {
     transition: all .5s ease;
     color: #166534;
-    border: 3px solid white;
     font-family:'Montserrat', sans-serif;
     text-transform: uppercase;
     text-align: center;
-    line-height: 1;
     font-size: 17px;
     background-color : #fff;
     padding: 10px;
     margin: 2%;
-    outline: none;
     border-radius: 4px;
     font-weight: 600;
     letter-spacing: 0.05em;
     margin-bottom: 8%;
+}
+
+#home a:hover {
+    background: #03543f;
+    color: white;
 }
 
 #recherche {
@@ -137,8 +139,164 @@ a {
 }
 
 .input-container input:focus {
-    outline: none; /* Ensure no outline */
-    box-shadow: none; /* Remove box shadow */
+    outline: none;
+    box-shadow: none;
+}
+
+#tutos {
+    margin-top: 22%;
+    text-align: center;
+}
+
+#tutos h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 1.3em;
+    margin-bottom: 1%;
+}
+
+#tutos p {
+    font-size: 0.9em;
+}
+
+#videos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 2% auto;
+}
+
+#videos img {
+    height: 330px;
+}
+
+#tutos a {
+    background: #03543f;
+    padding: 0.5% 3%;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+}
+
+#tutos a:hover {
+    background: #023526;
+}
+
+#bienvenue {
+    text-align: center;
+    margin-top: 5%;
+}
+
+#bienvenue h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 1.3em;
+    margin-bottom: 1%;
+}
+
+#bienvenue p {
+    font-size: 0.9em;
+}
+
+.left {
+    display: flex;
+    flex-direction: row-reverse;
+    max-width: 1200px;
+    margin: 2% auto;
+}
+
+.left img {
+    width: 45%;
+}
+
+.left .text {
+    margin-left: 2%;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text h2 {
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    margin-bottom: 2%;
+}
+
+.right {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    margin: 2% auto;
+}
+
+.right img {
+    width: 45%;
+}
+
+.right .text {
+    margin-right: 2%;
+}
+
+@media  screen and (max-width: 799px) {
+    #home {
+        height: 65vh;
+        background-size: 250vw 100vh;
+    }
+    #home img {
+        width: 60%;
+        height: auto;
+    }
+    #home a {
+        font-size: 1em;
+    }
+    #recherche {
+        top: 65vh;
+        width: 90%;
+    }
+    #tutos {
+        margin-top: 45%;
+    }
+    #videos {
+        flex-direction: column;
+        width: 85%;
+    }
+    #videos img {
+        height: auto;
+        margin: 3% 0;
+    }
+    #tutos a {
+        padding: 1.5% 7%;
+    }
+    #bienvenue {
+        margin-top: 10%;
+    }
+    .left {
+        flex-direction: column-reverse;
+        width: 85%;
+        margin: 8% auto;
+    }
+    .left img {
+        width: 100%;
+    }
+    .left .text {
+        margin: 3% 0;
+    }
+    .right {
+        flex-direction: column-reverse;
+        width: 85%;
+        margin: 8% auto;
+    }
+    .right img {
+        width: 100%;
+    }
+    .right .text {
+        margin: 3% 0;
+    }
 }
 
 /* LISTE JARDINS */
@@ -193,9 +351,9 @@ a {
 
 #contact form h1 {
     text-align: center;
-    font-weight: 400;
+    font-weight: 600;
     font-family: "Roboto", sans-serif;
-    font-size: 3em;
+    font-size: 1.3em;
     letter-spacing: 0.02em;
 }
 
@@ -257,19 +415,19 @@ a {
 
 #pp_layout {
     padding: 2%;
-    height: 20em;
-    width: 18em;
+    height: 16em;
+    width: 17em;
     background: white;
     border-radius: 5px;
     text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
-#pp_layout a {
-    font-size: 0.8em;
-}
-
-#pp_layout h3 {
-    margin-top: 5%;
+#pp_layout a:hover {
+    background: rgb(236, 236, 236);
+    padding: 2% 5%;
+    border-radius: 5px;
+    border: dashed 2px rgb(206, 206, 206);
 }
 
 #pp_form img {
@@ -278,7 +436,82 @@ a {
     margin-bottom: 10%;
 }
 
+#infos_layout {
+    background: white;
+    margin-left: 2%;
+    border-radius: 5px;
+    padding: 2%;
+    width: 40em;
+    height: 16em;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
 
+#infos_layout h2 {
+    font-weight: 600;
+    margin-bottom: 3%;
+}
+
+#infos_layout a {
+    background: #03543f;
+    border-radius: 5px;
+    padding: 1.5% 5%;
+    color: white;
+}
+
+#infos_layout a:hover {
+    background: #023526;
+}
+
+#infos_email {
+    margin-bottom: 6%;
+}
+
+.infos {
+    text-align: left;
+    display: flex;
+    padding: 1.5% 0;
+    border-bottom: solid 1px #c2c2c2;
+}
+
+.infos h3 {
+    width: 30%;
+    font-weight: 600;
+}
+
+.infos p {
+    margin: 0 0.8%;
+}
+
+#partage_jardin {
+    background: white;
+    border-radius: 5px;
+    padding: 2%;
+    margin: 2% 0 2% 0;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+#partage_jardin h3 {
+    font-weight: 600;
+}
+
+#partage_jardin p {
+    margin: 3% 0;
+}
+
+#partage_jardin a {
+    background: #03543f;
+    padding: 1% 5%;
+    border-radius: 5px;
+    color: white;
+}
+
+#reserv {
+    background: white;
+    border-radius: 5px;
+    padding: 2%;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
 
 /* ADMIN */
 
@@ -414,4 +647,10 @@ a {
 
 #footer a:hover {
     text-decoration: underline;
+}
+
+@media  screen and (max-width: 799px){
+    #links {
+        padding: 0 5%;
+    }
 }
