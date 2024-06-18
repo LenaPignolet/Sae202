@@ -1,5 +1,6 @@
 <?php
-session_start(); // Démarrer la session pour accéder aux variables de session
+session_start(); 
+
 
 require('../header.php');
 ?>
@@ -16,9 +17,9 @@ require('../header.php');
 <h2>Vous venez d'ajouter un jardin</h2>
 <hr>
 <?php
-// Vérifiez que l'utilisateur est connecté
 if (!isset($_SESSION['id'])) {
-    die('Erreur : Vous devez être connecté pour ajouter un jardin.');
+    header('Location: ../auth/formConnexion.php'); 
+    exit();
 }
 
 $nom_jardin = $_POST['jardin_nom'];
